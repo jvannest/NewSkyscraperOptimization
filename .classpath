@@ -83,6 +83,5 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="peasycam.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/Users/jasonvannest/Documents/Processing/libraries/peasycam/library/PeasyCam.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
