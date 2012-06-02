@@ -1,4 +1,3 @@
-//This is a comment
 package proclipsingskyscraperoptimization;
 
 import processing.core.PApplet;
