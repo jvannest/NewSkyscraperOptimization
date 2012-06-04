@@ -18,7 +18,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet {
 	//PGraphics3D g3; 
 	
 	Skyscraper mySkyscraper;
-	int numLevels = 15;
+	int numLevels = 34;
 	
 	int feet = 12;
 	
@@ -29,7 +29,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet {
 	public void setup() {
 		size(1200,900, P3D);
 		
-		cam = new PeasyCam(this, 200*feet);
+		cam = new PeasyCam(this, 300*feet);
 		cam.setMinimumDistance(2*feet);
 		cam.setMaximumDistance(2000*feet);
 		
@@ -67,7 +67,6 @@ public class ProclipsingSkyscraperOptimization extends PApplet {
 	}
 	
 	void setupSliders() {
-		  //controlP5.addSlider("slider",0,200,128,20,100,10,100);
 		  controlP5.addSlider("VAR 1", 0, 3, 2, 20, 50, 200, 20);
 		  controlP5.addSlider("VAR 2", 0, 3, 2, 20, 75, 200, 20);
 		  controlP5.addSlider("VAR 3", 0, 4, 3, 20, 100, 200, 20);
