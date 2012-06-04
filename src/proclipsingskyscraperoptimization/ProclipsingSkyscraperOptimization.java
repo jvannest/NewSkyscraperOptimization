@@ -56,6 +56,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet {
 
 	void gui() {
 		noSmooth();
+		//this is a comment
 		//currCameraMatrix = new PMatrix3D(g3.camera);
 		camera();
 		fill(155);
