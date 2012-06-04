@@ -18,7 +18,11 @@ public class ProclipsingSkyscraperOptimization extends PApplet {
 	//PGraphics3D g3; 
 	
 	Skyscraper mySkyscraper;
+<<<<<<< HEAD
 	int numLevels = 8;
+=======
+	int numLevels = 7;
+>>>>>>> branch 'master' of https://rcabret@github.com/jvannest/NewSkyscraperOptimization.git
 	
 	int feet = 12;
 	
