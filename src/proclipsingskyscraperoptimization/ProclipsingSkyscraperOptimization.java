@@ -21,13 +21,13 @@ public class ProclipsingSkyscraperOptimization extends PApplet {
 
 	int numLevels = 34;
 
-	
+
 	int feet = 12;
 	
 	int guiWidth = 350;
 	int guiHeight = 900;
 
-
+    
 	public void setup() {
 		size(1200,900, P3D);
 		
@@ -52,6 +52,9 @@ public class ProclipsingSkyscraperOptimization extends PApplet {
 		gui();
 	}
 	
+public void betterGUI(){
+  //Fake Method  	
+    }
 	void prePeasy(){
 		translate(0, 0, -2500);
 	}
