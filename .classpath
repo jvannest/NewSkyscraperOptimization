@@ -82,6 +82,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="peasycam.jar"/>
+	<classpathentry kind="lib" path="lib/base/controlP5/library/controlP5.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/Users/jasonvannest/Documents/Processing/libraries/controlP5/library/controlP5.jar"/>
 	<classpathentry kind="output" path="bin"/>

@@ -19,6 +19,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet {
 	
 	Skyscraper mySkyscraper;
 	int numLevels = 34;
+
 	
 	int feet = 12;
 	
