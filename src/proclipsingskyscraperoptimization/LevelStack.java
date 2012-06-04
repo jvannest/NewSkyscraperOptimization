@@ -23,7 +23,7 @@ public class LevelStack {
     public void drawStack(){
     	for (int i=0; i<myLevels.size(); i++){
     		Level lev = (Level) myLevels.get(i);
-    		parent.println("Got Level " + i + " out of the arrayList... here comes draw()...");
+    		//parent.println("Got Level " + i + " out of the arrayList... here comes draw()...");
     		lev.drawLevel(i);
     	}
     }
