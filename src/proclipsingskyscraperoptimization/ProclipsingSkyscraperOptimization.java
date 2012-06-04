@@ -18,7 +18,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet {
 	//PGraphics3D g3; 
 	
 	Skyscraper mySkyscraper;
-	int numLevels = 15;
+	int numLevels = 8;
 	
 	int feet = 12;
 	
