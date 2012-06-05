@@ -27,7 +27,7 @@ public class Level {
     	parent.pushMatrix(); 
     	parent.translate(0,0,elevation); 
     	parent.noStroke();  // levels are not outlined
-    	parent.fill(250-i*10,0,0,5); // levels are transparent red
+    	parent.fill(250,0,0,5); // levels are transparent red
     	parent.rectMode(PApplet.CENTER);
     	parent.rect(0, 0, levelWidth, levelWidth); //  
     	parent.popMatrix(); 

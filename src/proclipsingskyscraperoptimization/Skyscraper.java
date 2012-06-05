@@ -25,14 +25,13 @@ public class Skyscraper {
     	parent = p;
     	myLevelStack = new LevelStack(numLevels, parent); 
     	myColumnGrid = new ColumnGrid(skyscraperWidth, skyscraperDepth, parent); 
-    	
-    	//initFloors(numLevels);
+    	initFloors(numLevels, parent);
     }
   
     public void draw(){
     	myLevelStack.drawStack();
     	myColumnGrid.drawGrid();
-    	//drawFloors();
+    	drawFloors();
     	//myStairs.draw();
     }
     
@@ -46,7 +45,7 @@ public class Skyscraper {
     
     public void drawFloors(){
     	for(int i=0; i<myFloors.length; i++){
-    		
+    		myFloors[i].drawFloor();
     	}
     }
 }

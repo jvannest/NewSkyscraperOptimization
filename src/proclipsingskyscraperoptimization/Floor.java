@@ -9,7 +9,7 @@ public class Floor {
 	
 	PApplet parent; // The parent PApplet that we will render ourselves onto
 	Level level;
-	
+	LevelStack levels;
 	int thickness = 12;
 	String material = "cement";
 	
@@ -33,9 +33,11 @@ public class Floor {
     void drawFloor(){
     	setColors();
     	parent.pushMatrix(); 
-    	parent.translate(0,0,level.elevation); 
-    	parent.rectMode(PApplet.CENTER);
-    	parent.rect(0, 0, level.levelWidth, level.levelWidth); //to be replaced with extruded sketch of floor  
+    	parent.translate(0,0, level.elevation);
+    	parent.box(level.levelWidth-60, level.levelWidth-60, thickness);
+    	//parent.rectMode(PApplet.CENTER);
+    	//parent.fill(155);
+    	//parent.rect(0, 0, level.levelWidth, level.levelWidth); //to be replaced with extruded sketch of floor  
     	parent.popMatrix(); 
     }
     
