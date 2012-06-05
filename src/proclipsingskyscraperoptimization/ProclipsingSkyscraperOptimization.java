@@ -19,7 +19,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet {
 	
 	Skyscraper mySkyscraper;
 
-	int numLevels = 34;
+	int numLevels = 15;
 
 
 	int feet = 12;
@@ -41,7 +41,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet {
 		  
 		mySkyscraper = new Skyscraper(numLevels, this);
 		
-		setupSliders();
+		//setupSliders();
 	}
 
 	public void draw() {
@@ -49,7 +49,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet {
 		prePeasy();
 		mySkyscraper.draw();
 		
-		gui();
+		//gui();
 	}
 	
 public void betterGUI(){
@@ -59,23 +59,23 @@ public void betterGUI(){
 		translate(0, 0, -2500);
 	}
 
-	void gui() {
-		noSmooth();
+	//void gui() {
+		//noSmooth();
 		//this is a comment
 		//currCameraMatrix = new PMatrix3D(g3.camera);
-		camera();
-		fill(155);
-		noStroke();
+		//camera();
+		//fill(155);
+		//noStroke();
 		//rect(0, 0, guiWidth, guiHeight);
-		controlP5.draw();
+		//controlP5.draw();
 		//g3.camera = currCameraMatrix;
-	}
+	//}
 	
-	void setupSliders() {
-		  controlP5.addSlider("VAR 1", 0, 3, 2, 20, 50, 200, 20);
-		  controlP5.addSlider("VAR 2", 0, 3, 2, 20, 75, 200, 20);
-		  controlP5.addSlider("VAR 3", 0, 4, 3, 20, 100, 200, 20);
-		  controlP5.addSlider("VAR 4", 0, 300, 100, 20, 125, 200, 20);
-		}
+	//void setupSliders() {
+		  //controlP5.addSlider("VAR 1", 0, 3, 2, 20, 50, 200, 20);
+		  //controlP5.addSlider("VAR 2", 0, 3, 2, 20, 75, 200, 20);
+		  //controlP5.addSlider("VAR 3", 0, 4, 3, 20, 100, 200, 20);
+		  //controlP5.addSlider("VAR 4", 0, 300, 100, 20, 125, 200, 20);
+		//}
 
 }

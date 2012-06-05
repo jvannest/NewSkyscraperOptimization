@@ -23,11 +23,11 @@ public class ColumnGrid {
     	myNSLines = new ArrayList();
     	myEWLines = new ArrayList();
 
-    	for (int i=0; i<(int)(gridDepth/typicalGridDist); i++){
+    	for (int i=0; i<(int)(gridDepth/typicalGridDist); i++){ //don't really understand whats going on here
     		myNSLines.add( new ColumnGridLine(i*typicalGridDist, parent) );
     	}
     	
-    	for (int i=0; i<(int)(gridWidth/typicalGridDist); i++){
+    	for (int i=0; i<(gridWidth/typicalGridDist); i++){
     		myEWLines.add( new ColumnGridLine(i*typicalGridDist, parent) );
     	}
 
