@@ -13,7 +13,7 @@ public class Skyscraper {
     int feet = 12;
     
     int skyscraperWidth = 100*feet;
-    int skyscraperDepth = 125*feet;
+    int skyscraperDepth = 100*feet;
     
     PApplet parent; // The parent PApplet that we will render ourselves onto
     
@@ -35,11 +35,11 @@ public class Skyscraper {
     	//myStairs.draw();
     }
     
-    public void initFloors( int numLevels, PApplet p ){
+   public void initFloors( int numLevels, PApplet p ){
     	myFloors = new Floor[numLevels];
     	parent = p;
     	for(int i=0; i<numLevels; i++){
-    		myFloors[i] = new Floor( (Level) myLevelStack.myLevels.get(i), parent);
+    	myFloors[i] = new Floor( (Level) myLevelStack.myLevels.get(i), parent);
     	}
     }
     
