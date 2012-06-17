@@ -52,13 +52,6 @@ public class ProclipsingSkyscraperOptimization extends PApplet {
 		gui();
 	}
 	
-<<<<<<< HEAD
-=======
-	public void betterGUI(){
-		//Fake Method  	
-    }
-	
->>>>>>> branch 'master' of https://github.com/jvannest/NewSkyscraperOptimization.git
 	void prePeasy(){
 		translate(0, 0, -2500);
 	}
