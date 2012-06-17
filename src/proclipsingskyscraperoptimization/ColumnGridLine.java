@@ -13,6 +13,7 @@ public class ColumnGridLine {
 	int gridTextSize = 50;
 	String name;
 	
+	
 	ColumnGridLine( int num, PApplet p){
 		parent = p;
 		dist = num;

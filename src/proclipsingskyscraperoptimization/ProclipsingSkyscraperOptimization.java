@@ -52,22 +52,18 @@ public class ProclipsingSkyscraperOptimization extends PApplet {
 		gui();
 	}
 	
-public void betterGUI(){
-  //Fake Method  	
-    }
 	void prePeasy(){
 		translate(0, 0, -2500);
 	}
 
 	void gui() {
 		noSmooth();
-		//this is a comment
 		//currCameraMatrix = new PMatrix3D(g3.camera);
 		camera();
 		fill(155);
 		noStroke();
 		//rect(0, 0, guiWidth, guiHeight);
-		//controlP5.draw();
+		controlP5.draw();
 		//g3.camera = currCameraMatrix;
 	}
 	
