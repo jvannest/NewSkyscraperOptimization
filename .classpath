@@ -83,6 +83,8 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="peasycam.jar"/>
 	<classpathentry kind="lib" path="lib/base/controlP5/library/controlP5.jar"/>
+	<classpathentry kind="lib" path="lib/base/anar/anar.jar"/>
+	<classpathentry kind="lib" path="lib/base/anar/TraerAnar.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
