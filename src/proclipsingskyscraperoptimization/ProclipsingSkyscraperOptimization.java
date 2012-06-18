@@ -96,7 +96,6 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 				   .setSize(100,100);
 		
 		//MyListener = new MyControlListener();
-		  
 		//cg1.getController(" Move NS GridLine").addListener(MyListener);	
 		
 		for(int i=1; i<=ColumnGrid.myNSLines.size(); i++){
@@ -122,6 +121,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		    
 		  //}
 	//}
+	
 	public void controlEvent(ControlEvent theEvent) {
 		  // DropdownList is of type ControlGroup.
 		  // A controlEvent will be triggered from inside the ControlGroup class.
@@ -136,5 +136,11 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		  else if (theEvent.isController()) {
 		    println("event from controller : "+theEvent.getController().getValue()+" from "+theEvent.getController());
 		  }
+		  
+		  //Testing Listener and controlEvent
+		  if(theEvent.getGroup().getValue() == 1.0 && theEvent.getGroup() == cg1){
+			  println("Permission to edit Grid_Line 2 ");
+		  }
 		}
+
 }
