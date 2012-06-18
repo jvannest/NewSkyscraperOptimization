@@ -7,8 +7,8 @@ import processing.core.PApplet;
 public class ColumnGrid {
 	
 	PApplet parent; // The parent PApplet that we will render ourselves onto
-    ArrayList myNSLines;
-    ArrayList myEWLines;
+    static ArrayList myNSLines;
+    static ArrayList myEWLines;
     
     int feet = 12;
     int typicalGridDist = (10*feet);
@@ -39,6 +39,7 @@ public class ColumnGrid {
     		ColumnGridLine g = (ColumnGridLine) myNSLines.get(i);
     		g.drawGridLine(gridWidth, gridDepth);
     		g.drawGridLineName(gridWidth, i);
+    			
     		
     	}
     	parent.pushMatrix();

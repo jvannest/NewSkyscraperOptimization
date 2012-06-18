@@ -17,7 +17,7 @@ public class ColumnGridLine {
 	ColumnGridLine( int num, PApplet p){
 		parent = p;
 		dist = num;
-		name = (Integer.toString(num) );
+		name = (Integer.toString(num));
     }
 
 	void drawGridLine(int w, int d){
