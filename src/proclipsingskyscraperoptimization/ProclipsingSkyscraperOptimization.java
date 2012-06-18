@@ -10,10 +10,12 @@ import proclipsingskyscraperoptimization.Skyscraper;
 import peasy.*;
 import controlP5.*;
 
+
 public class ProclipsingSkyscraperOptimization extends PApplet{
 	
 	PeasyCam cam;
 	ControlP5 controlP5;
+	//MyControlListener MyListener;
 	//PMatrix3D currCameraMatrix;
 	//PGraphics3D g3; 
 	
@@ -46,13 +48,14 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		
 		setupSliders();
 		setupGrid(); //Calling New Method;
+		
+		
 	}
 
 	public void draw() {
 		background(250);
 		prePeasy();
 		mySkyscraper.draw();
-		
 		gui();
 	}
 	
@@ -91,6 +94,11 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		cg2 = controlP5.addDropdownList("Move EW GridLine")
 				   .setPosition(130,170)
 				   .setSize(100,100);
+		
+		//MyListener = new MyControlListener();
+		  
+		//cg1.getController(" Move NS GridLine").addListener(MyListener);	
+		
 		for(int i=1; i<=ColumnGrid.myNSLines.size(); i++){
 			cg1.addItem(" Grid_Line "+i, i-1);
 		}
@@ -100,9 +108,33 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 			cg2.addItem(" Grid_Line "+(char)i, i-66);
 		}
 		
-		cg1.setIndex(ColumnGrid.myNSLines.size());
-		cg2.setIndex(ColumnGrid.myEWLines.size());
-		  
+		
+		//cg1.setIndex(ColumnGrid.myNSLines.size());
+		//cg2.setIndex(ColumnGrid.myEWLines.size());
+		
 	}
+	//class MyControlListener implements ControlListener {
+		  
+		 // public void controlEvent(ControlEvent theEvent){ 
+			  //System.out.println("i got an event from mySlider, " +
+			           // "changing background color to "+
+			            //theEvent.getController().getValue());      
+		    
+		  //}
+	//}
+	public void controlEvent(ControlEvent theEvent) {
+		  // DropdownList is of type ControlGroup.
+		  // A controlEvent will be triggered from inside the ControlGroup class.
+		  // therefore you need to check the originator of the Event with
+		  // if (theEvent.isGroup())
+		  // to avoid an error message thrown by controlP5.
 
+		  if (theEvent.isGroup()) {
+		    // check if the Event was triggered from a ControlGroup
+		    println("event from group : "+theEvent.getGroup().getValue()+" from "+theEvent.getGroup());
+		  } 
+		  else if (theEvent.isController()) {
+		    println("event from controller : "+theEvent.getController().getValue()+" from "+theEvent.getController());
+		  }
+		}
 }
