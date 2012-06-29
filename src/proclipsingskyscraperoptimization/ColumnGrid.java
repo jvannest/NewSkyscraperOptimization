@@ -49,6 +49,7 @@ public class ColumnGrid {
     		ColumnGridLine g = (ColumnGridLine) myEWLines.get(i);
     		g.drawGridLine(gridWidth, gridDepth);
     		g.drawGridLineLetter(gridWidth, i);
+    		//g.drawGridLineLetter(typicalGridDist, i);
     	}
     	parent.popMatrix();
     }

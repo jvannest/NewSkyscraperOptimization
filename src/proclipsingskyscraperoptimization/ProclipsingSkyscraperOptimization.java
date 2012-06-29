@@ -21,6 +21,8 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	
 	Skyscraper mySkyscraper;
 	DropdownList cg1, cg2; //Create variable for DropdowLists
+	Slider sl1;
+	
 	
 	
 
@@ -53,6 +55,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	}
 
 	public void draw() {
+		//background(MyListener.col);
 		background(250);
 		prePeasy();
 		mySkyscraper.draw();
@@ -79,6 +82,17 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		  controlP5.addSlider("VAR 2", 0, 3, 2, 20, 75, 200, 20);
 		  controlP5.addSlider("VAR 3", 0, 4, 3, 20, 100, 200, 20);
 		  controlP5.addSlider("VAR 4", 0, 300, 100, 20, 125, 200, 20);
+		 //new slider for moving Grid Line
+		 sl1 = controlP5.addSlider("EditGridLine")
+			            .setRange(100,200)
+		 				.setValue(140)
+		 				.setPosition(20,300);
+	
+		 
+		//MyListener = new MyControlListener();
+		  
+		//controlP5.getController("Edit GridLine").addListener(MyListener);
+	
 		}
 	
 	//New Method
@@ -89,11 +103,11 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	 */
 	void setupGrid(){
 		cg1 = controlP5.addDropdownList(" Move NS GridLine")
-			       .setPosition(20,170)
-			       .setSize(100,100);
-		cg2 = controlP5.addDropdownList("Move EW GridLine")
-				   .setPosition(130,170)
-				   .setSize(100,100);
+			           .setPosition(20,170)
+			           .setSize(100,100);
+		cg2 = controlP5.addDropdownList(" Move EW GridLine")
+				       .setPosition(130,170)
+				       .setSize(100,100);
 		
 		//MyListener = new MyControlListener();
 		//cg1.getController(" Move NS GridLine").addListener(MyListener);	
@@ -104,8 +118,9 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		
 		for(int i=65; i<=ColumnGrid.myEWLines.size()+65; i++){
 			
-			cg2.addItem(" Grid_Line "+(char)i, i-66);
+			cg2.addItem(" Grid_Line "+(char)i, i-65);
 		}
+		
 		
 		
 		//cg1.setIndex(ColumnGrid.myNSLines.size());
@@ -113,15 +128,17 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		
 	}
 	//class MyControlListener implements ControlListener {
-		  
-		 // public void controlEvent(ControlEvent theEvent){ 
-			  //System.out.println("i got an event from mySlider, " +
-			           // "changing background color to "+
-			            //theEvent.getController().getValue());      
-		    
-		  //}
-	//}
-	
+		//int col;
+		  // public void controlEventSlider(ControlEvent theEvent2){ 
+			//System.out.println("i got an event from mySlider, " +
+			        //  "changing background color to "+
+			           // theEvent2.getController().getValue());      
+		    			//col = (int)theEvent2.getController().getValue();
+		// }
+	public void EditGridLine(int theValue){
+		System.out.println(+theValue);
+	}
+		
 	public void controlEvent(ControlEvent theEvent) {
 		  // DropdownList is of type ControlGroup.
 		  // A controlEvent will be triggered from inside the ControlGroup class.
@@ -135,12 +152,24 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		  } 
 		  else if (theEvent.isController()) {
 		    println("event from controller : "+theEvent.getController().getValue()+" from "+theEvent.getController());
+		   
 		  }
+		  
 		  
 		  //Testing Listener and controlEvent
 		  if(theEvent.getGroup().getValue() == 1.0 && theEvent.getGroup() == cg1){
 			  println("Permission to edit Grid_Line 2 ");
 		  }
-		}
+		  
+		  //Connecting the value of the Dropdownlist with the index of the ArrayList value
+		  //This is done by using the get() message
+		  //Having a problem with the listener still, when I chose a line from the NSLine array
+		  //it also picks up the line from the EW this is because the two dropdownlists are using the
+		  //same listener I believe.
+		  System.out.println(ColumnGrid.myNSLines.get((int)theEvent.getGroup().getValue()));
+		  System.out.println(ColumnGrid.myEWLines.get((int)theEvent.getGroup().getValue()));
+	}
+          
 
-}
+	}
+//}
