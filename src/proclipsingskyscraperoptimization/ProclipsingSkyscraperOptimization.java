@@ -136,7 +136,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		    			//col = (int)theEvent2.getController().getValue();
 		// }
 	public void EditGridLine(int theValue){
-		System.out.println(+theValue);
+		System.out.println(theValue);
 	}
 		
 	public void controlEvent(ControlEvent theEvent) {
@@ -166,8 +166,13 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		  //Having a problem with the listener still, when I chose a line from the NSLine array
 		  //it also picks up the line from the EW this is because the two dropdownlists are using the
 		  //same listener I believe.
-		  System.out.println(ColumnGrid.myNSLines.get((int)theEvent.getGroup().getValue()));
-		  System.out.println(ColumnGrid.myEWLines.get((int)theEvent.getGroup().getValue()));
+		  //System.out.println(ColumnGrid.myNSLines.get((int)theEvent.getGroup().getValue()));
+		  //System.out.println(ColumnGrid.myEWLines.get((int)theEvent.getGroup().getValue()));
+		  int p = (int)theEvent.getGroup().getValue();
+		  ColumnGridLine temp;
+		  temp = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(p);
+		  System.out.println(temp.id);
+		  System.out.println(mySkyscraper.myColumnGrid.myEWLines.get((int)theEvent.getGroup().getValue()));
 	}
           
 

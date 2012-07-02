@@ -10,7 +10,7 @@ public class Floor {
 	PApplet parent; // The parent PApplet that we will render ourselves onto
 	Level level;
 	LevelStack levels;
-	int thickness = 12;
+	int thickness = 120;
 	String material = "cement";
 	
 	//ArrayList profilePoints;           <-- Implement when we can draw floor profiles
