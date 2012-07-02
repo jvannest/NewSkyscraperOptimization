@@ -20,6 +20,9 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	//PGraphics3D g3; 
 	
 	Skyscraper mySkyscraper;
+	
+	ColumnGridLine temp;
+		
 	DropdownList cg1, cg2; //Create variable for DropdowLists
 	Slider sl1;
 	
@@ -84,9 +87,10 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		  controlP5.addSlider("VAR 4", 0, 300, 100, 20, 125, 200, 20);
 		 //new slider for moving Grid Line
 		 sl1 = controlP5.addSlider("EditGridLine")
-			            .setRange(100,200)
-		 				.setValue(140)
-		 				.setPosition(20,300);
+			            .setRange(0,500)
+		 				.setValue(0)
+		 				.setPosition(20,300)
+		 				.setSize(500,20);
 	
 		 
 		//MyListener = new MyControlListener();
@@ -127,6 +131,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		//cg2.setIndex(ColumnGrid.myEWLines.size());
 		
 	}
+	
 	//class MyControlListener implements ControlListener {
 		//int col;
 		  // public void controlEventSlider(ControlEvent theEvent2){ 
@@ -135,7 +140,12 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 			           // theEvent2.getController().getValue());      
 		    			//col = (int)theEvent2.getController().getValue();
 		// }
+	
 	public void EditGridLine(int theValue){
+		int p = (int) cg2.getValue();
+		temp = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(p);
+		temp.dist = theValue;
+		temp.name = Integer.toString(theValue);
 		System.out.println(theValue);
 	}
 		
@@ -146,13 +156,12 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		  // if (theEvent.isGroup())
 		  // to avoid an error message thrown by controlP5.
 
-		  if (theEvent.isGroup()) {
+		  /*if (theEvent.isGroup()) {
 		    // check if the Event was triggered from a ControlGroup
 		    println("event from group : "+theEvent.getGroup().getValue()+" from "+theEvent.getGroup());
 		  } 
 		  else if (theEvent.isController()) {
 		    println("event from controller : "+theEvent.getController().getValue()+" from "+theEvent.getController());
-		   
 		  }
 		  
 		  
@@ -169,10 +178,9 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		  //System.out.println(ColumnGrid.myNSLines.get((int)theEvent.getGroup().getValue()));
 		  //System.out.println(ColumnGrid.myEWLines.get((int)theEvent.getGroup().getValue()));
 		  int p = (int)theEvent.getGroup().getValue();
-		  ColumnGridLine temp;
 		  temp = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(p);
 		  System.out.println(temp.id);
-		  System.out.println(mySkyscraper.myColumnGrid.myEWLines.get((int)theEvent.getGroup().getValue()));
+		  System.out.println(mySkyscraper.myColumnGrid.myEWLines.get((int)theEvent.getGroup().getValue()));*/
 	}
           
 
