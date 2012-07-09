@@ -25,6 +25,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		
 	DropdownList cg1, cg2; //Create variable for DropdowLists
 	Slider sl1;
+	Slider sl2;
 	
 	
 	
@@ -86,11 +87,17 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		  controlP5.addSlider("VAR 3", 0, 4, 3, 20, 100, 200, 20);
 		  controlP5.addSlider("VAR 4", 0, 300, 100, 20, 125, 200, 20);
 		 //new slider for moving Grid Line
-		 sl1 = controlP5.addSlider("EditGridLine")
+		 sl1 = controlP5.addSlider("EditGridLineEW")
 			            .setRange(0,500)
 		 				.setValue(0)
 		 				.setPosition(20,300)
 		 				.setSize(500,20);
+		 
+		 sl2 = controlP5.addSlider("EditGridLineNS")
+		            .setRange(0,500)
+	 				.setValue(0)
+	 				.setPosition(20,350)
+	 				.setSize(500,20);
 	
 		 
 		//MyListener = new MyControlListener();
@@ -141,9 +148,17 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		    			//col = (int)theEvent2.getController().getValue();
 		// }
 	
-	public void EditGridLine(int theValue){
+	public void EditGridLineEW(int theValue){
 		int p = (int) cg2.getValue();
 		temp = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(p);
+		temp.dist = theValue;
+		temp.name = Integer.toString(theValue);
+		System.out.println(theValue);
+	}
+	
+	public void EditGridLineNS(int theValue){
+		int p = (int) cg1.getValue();
+		temp = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(p);
 		temp.dist = theValue;
 		temp.name = Integer.toString(theValue);
 		System.out.println(theValue);
