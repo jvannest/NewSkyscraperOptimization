@@ -25,11 +25,11 @@ public class ColumnGrid {
        
     	//Creates the size of the NS Array lines
     	for (int i=0; i<((gridDepth+typicalGridDist)/typicalGridDist); i++){ 
-    		myNSLines.add( new ColumnGridLine(i,i*typicalGridDist, parent) );
+    		myNSLines.add( new ColumnGridLine(i*typicalGridDist, parent) );
     	}
     	//Creates the size of the EW Array lines
     	for (int i=0; i<((gridWidth+typicalGridDist)/typicalGridDist); i++){
-    		myEWLines.add( new ColumnGridLine(i,i*typicalGridDist, parent) );
+    		myEWLines.add( new ColumnGridLine(i*typicalGridDist, parent) );
     	}
 
     }
