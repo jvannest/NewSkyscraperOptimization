@@ -21,11 +21,15 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	
 	Skyscraper mySkyscraper;
 	
+	//ColumnGridLine temp,temp2;
 	ColumnGridLine temp;
+	
 		
 	DropdownList cg1, cg2; //Create variable for DropdowLists
+
 	Slider sl1;
 	Slider sl2;
+
 	
 	
 	
@@ -46,6 +50,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		cam.setMinimumDistance(2*feet);
 		cam.setMaximumDistance(2000*feet);
 		
+		
 		controlP5 = new ControlP5(this);
 		//PFont p = font = loadFont("Helvetica-15.vlw");
 		//controlP5.setControlFont(p);
@@ -63,6 +68,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		background(250);
 		prePeasy();
 		mySkyscraper.draw();
+		//controlP5.setAutoDraw(false);
 		gui();
 	}
 	
@@ -77,6 +83,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		fill(155);
 		noStroke();
 		//rect(0, 0, guiWidth, guiHeight);
+		//controlP5.setAutoDraw(false);
 		controlP5.draw();
 		//g3.camera = currCameraMatrix;
 	}
@@ -87,17 +94,20 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		  controlP5.addSlider("VAR 3", 0, 4, 3, 20, 100, 200, 20);
 		  controlP5.addSlider("VAR 4", 0, 300, 100, 20, 125, 200, 20);
 		 //new slider for moving Grid Line
+
 		 sl1 = controlP5.addSlider("EditGridLineEW")
 			            .setRange(0,500)
-		 				.setValue(0)
+		 				//.setValue(mySkyscraper.myColumnGrid.typicalGridDist*(int)cg2.getValue())
+			            .setValue(0)
 		 				.setPosition(20,300)
 		 				.setSize(500,20);
-		 
+
 		 sl2 = controlP5.addSlider("EditGridLineNS")
 		            .setRange(0,500)
 	 				.setValue(0)
 	 				.setPosition(20,350)
 	 				.setSize(500,20);
+
 	
 		 
 		//MyListener = new MyControlListener();
@@ -148,6 +158,8 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		    			//col = (int)theEvent2.getController().getValue();
 		// }
 	
+
+	
 	public void EditGridLineEW(int theValue){
 		int p = (int) cg2.getValue();
 		temp = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(p);
@@ -165,7 +177,8 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	}
 		
 	public void controlEvent(ControlEvent theEvent) {
-		  // DropdownList is of type ControlGroup.
+		  
+		// DropdownList is of type ControlGroup.
 		  // A controlEvent will be triggered from inside the ControlGroup class.
 		  // therefore you need to check the originator of the Event with
 		  // if (theEvent.isGroup())

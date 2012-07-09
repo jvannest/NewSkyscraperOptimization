@@ -12,21 +12,19 @@ public class ColumnGridLine {
 	int margin = 25*feet;
 	int gridTextSize = 50;
 	String name;
-	String id;
 	
 	
-	ColumnGridLine(int idnum, int num, PApplet p){
+	ColumnGridLine(int num, PApplet p){
 		parent = p;
 		dist = num;
 		name = (Integer.toString(num));
-		id = (Integer.toString(idnum));
 	
     }
 	
-	public String getID() {
-		return id;
+	public String getName(){
+		return name;
+		
 	}
-
 	void drawGridLine(int w, int d){
 		parent.pushMatrix();
 		parent.stroke(150);
