@@ -8,6 +8,7 @@ import javax.swing.*;
 import processing.core.PApplet;
 import proclipsingskyscraperoptimization.Skyscraper;
 import peasy.*;
+import processing.opengl.*;
 import controlP5.*;
 
 
@@ -22,8 +23,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	Skyscraper mySkyscraper;
 	
 	//ColumnGridLine temp,temp2;
-	ColumnGridLine temp;
-	
+	ColumnGridLine temp;	
 		
 	DropdownList cg1, cg2; //Create variable for DropdowLists
 
@@ -57,10 +57,9 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		  
 		mySkyscraper = new Skyscraper(numLevels, this);
 		
-		setupSliders();
+		//setupSliders();
 		setupGrid(); //Calling New Method;
-		
-		
+
 	}
 
 	public void draw() {
@@ -133,11 +132,11 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		//MyListener = new MyControlListener();
 		//cg1.getController(" Move NS GridLine").addListener(MyListener);	
 		
-		for(int i=1; i<=ColumnGrid.myNSLines.size(); i++){
+		for(int i=1; i<=mySkyscraper.myColumnGrid.myNSLines.size(); i++){
 			cg1.addItem(" Grid_Line "+i, i-1);
 		}
 		
-		for(int i=65; i<=ColumnGrid.myEWLines.size()+65; i++){
+		for(int i=65; i<=mySkyscraper.myColumnGrid.myEWLines.size()+65; i++){
 			
 			cg2.addItem(" Grid_Line "+(char)i, i-65);
 		}

@@ -7,9 +7,9 @@ import processing.core.PApplet;
 public class ColumnGrid {
 	
 	PApplet parent; // The parent PApplet that we will render ourselves onto
-    static ArrayList myNSLines;
-    static ArrayList myEWLines;
-    static ArrayList myColumns;
+    ArrayList myNSLines;
+    ArrayList myEWLines;
+    ArrayList myColumns;
     
     static int feet = 12;
     static int typicalGridDist = (10*feet);
@@ -25,9 +25,6 @@ public class ColumnGrid {
     	myEWLines = new ArrayList();
     	myColumns = new ArrayList();
     	
-    	int x = myNSLines.size();
-    	int y = myEWLines.size();
-       
     	//Creates the size of the NS Array lines
     	for (int i=0; i<((gridDepth+typicalGridDist)/typicalGridDist); i++){ 
     		myNSLines.add( new ColumnGridLine(i*typicalGridDist, parent) );
@@ -36,13 +33,7 @@ public class ColumnGrid {
     	for (int i=0; i<((gridWidth+typicalGridDist)/typicalGridDist); i++){
     		myEWLines.add( new ColumnGridLine(i*typicalGridDist, parent) );
     	}
-    	
-    	for (int i=0; i<x; i++){
-    		for(int j=0; j<y; j++){
-    		myColumns.add( new Column((ColumnGridLine) myNSLines.get(i), (ColumnGridLine) myEWLines.get(j), parent));
-    		}
 
-    }
     }
     
     public void drawGrid(){
@@ -54,8 +45,6 @@ public class ColumnGrid {
     		
     	}
     	
-    
-    
     	parent.pushMatrix();
     	parent.rotateZ(PApplet.PI/2);
     	//parent.translate(0, , typicalGridDist);
@@ -67,15 +56,5 @@ public class ColumnGrid {
     	}
     	parent.popMatrix();
     }
-    
-    public void drawColumn(){
-    	for (int i=0; i<myColumns.size(); i++){
-    		Column g = (Column) myColumns.get(i);
-    		g.drawColumnModel();
-    	}
-    }
-    
-   
-
 }
 
