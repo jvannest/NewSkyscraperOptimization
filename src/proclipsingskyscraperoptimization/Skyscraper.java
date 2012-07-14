@@ -20,7 +20,7 @@ public class Skyscraper {
     
     LevelStack myLevelStack;
     ColumnGrid myColumnGrid;
-    Columns myColumns;
+    //Columns myColumns;
     Floor[] myFloors;
     Column[][] myColumn;
 
@@ -29,13 +29,13 @@ public class Skyscraper {
     	myLevelStack = new LevelStack(numLevels, parent); 
     	myColumnGrid = new ColumnGrid(skyscraperWidth, skyscraperDepth, parent); 
     	initFloors(numLevels, parent);
-    	initColumn(parent);
+    	initColumn(numLevels,parent);
     }
   
     public void draw(){
     	myLevelStack.drawStack();
     	myColumnGrid.drawGrid();
-    	drawFloors();
+    	//drawFloors();
     	drawColumns();
     	//myStairs.draw();
     }
@@ -48,7 +48,8 @@ public class Skyscraper {
     	}
     }
    
-   public void initColumn(PApplet p){
+   public void initColumn(int numLevels,PApplet p){
+	   
 	   parent = p;
 	   colSize = myColumnGrid.myNSLines.size();
 	   rowSize = myColumnGrid.myEWLines.size();
@@ -59,7 +60,8 @@ public class Skyscraper {
 			   k = (ColumnGridLine) myColumnGrid.myNSLines.get(i);
 			   l = (ColumnGridLine) myColumnGrid.myNSLines.get(j);
 			   System.out.println("["+i+"] "+"["+j+"] :"+k.dist+","+l.dist);
-			   myColumn[i][j] = new Column(k.dist, l.dist, p);
+			   myColumn[i][j] = new Column(numLevels, k.dist, l.dist, p);
+			   
 		   }
 	   }
    }

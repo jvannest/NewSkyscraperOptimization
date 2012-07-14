@@ -13,7 +13,7 @@ public class Level {
 	int textMargin = 2*feet;
 	int levelTextSize = 40;
     
-    Level ( int e, PApplet p){
+    Level (int e, PApplet p){
       this.elevation = e;
       parent = p;
     }

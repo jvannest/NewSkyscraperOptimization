@@ -7,8 +7,8 @@ import java.util.*;
 public class LevelStack {
 	PApplet parent; // The parent PApplet that we will render ourselves onto
     ArrayList myLevels;
-    int feet = 12;
-    int typicalLevelHeight = (14*feet)+4;
+    static int feet = 12;
+    static int typicalLevelHeight = (14*feet)+4;
     
     public LevelStack ( int numLevels, PApplet p ){
     	parent = p;

@@ -12,20 +12,22 @@ public class Column {
 	//Level top;   // Used to generate the column height
 	int base1, top1;
 	int feet = 12;
+	int y = LevelStack.typicalLevelHeight;
 	
 	//ColumnGridLine ns;  // All columns occur at Grid line intersections
 	//ColumnGridLine ew;
 	
 	int ns;
 	int ew;
-	
+	int numLevels;
 	float w;  // column width, this is set by user choice of profile
 	float d;  // column depth, this is set by user choice of profile
 	float h;  // column height, this is a calculated value -- user never directly sets
 	
 	//float crossSection;  //TODO replace with a sketch or profile
 	
-	public Column ( /*Level l1, Level l2,*/ int n, int e, PApplet p) {
+	public Column ( /*Level l1, Level l2,*/int y, int n, int e, PApplet p) {
+		numLevels = y;
 		parent = p;
 		//base = l1;
         //top = l2;
@@ -45,7 +47,7 @@ public class Column {
     	parent.pushMatrix();
     	//parent.translate( -(mySkyscraper.myColumn.w/2), 0, (base.elevation + h/2) ); // CRUD the grid line doesn't know where it is!
     	parent.translate(ns-600, ew-600, 1118); // CRUD the grid line doesn't know where it is!
-    	parent.box(w, d, 2236); //to be replaced with extruded sketch of profile
+    	parent.box(w, d, (numLevels*y)); //to be replaced with extruded sketch of profile
     	parent.popMatrix();
 	}
 	
