@@ -9,7 +9,6 @@ public class ColumnGrid {
 	PApplet parent; // The parent PApplet that we will render ourselves onto
     ArrayList myNSLines;
     ArrayList myEWLines;
-    ArrayList myColumns;
     
     static int feet = 12;
     static int typicalGridDist = (10*feet);
@@ -23,7 +22,6 @@ public class ColumnGrid {
         gridDepth = d;
     	myNSLines = new ArrayList();
     	myEWLines = new ArrayList();
-    	myColumns = new ArrayList();
     	
     	//Creates the size of the NS Array lines
     	for (int i=0; i<((gridDepth+typicalGridDist)/typicalGridDist); i++){ 
@@ -42,7 +40,6 @@ public class ColumnGrid {
     		g.drawGridLine(gridWidth, gridDepth);
     		g.drawGridLineName(gridWidth, i);
     			
-    		
     	}
     	
     	parent.pushMatrix();

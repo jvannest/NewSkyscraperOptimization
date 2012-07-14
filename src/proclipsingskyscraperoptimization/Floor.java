@@ -6,7 +6,6 @@ import processing.core.PApplet;
 
 public class Floor {
 
-	
 	PApplet parent; // The parent PApplet that we will render ourselves onto
 	Level level;
 	LevelStack levels;
@@ -17,7 +16,7 @@ public class Floor {
 	//Point[] profile = new Point[4]
 
     
-    Floor ( Level l, PApplet p){
+    Floor (Level l, PApplet p){
       level = l;
       parent = p;
       
@@ -34,7 +33,7 @@ public class Floor {
     	setColors();
     	parent.pushMatrix(); 
     	parent.translate(0,0, level.elevation);
-    	parent.box(level.levelWidth-60, level.levelWidth-60, thickness);
+    	parent.box(level.levelWidth, level.levelWidth, thickness);
     	//parent.rectMode(PApplet.CENTER);
     	//parent.fill(155);
     	//parent.rect(0, 0, level.levelWidth, level.levelWidth); //to be replaced with extruded sketch of floor  
@@ -43,7 +42,7 @@ public class Floor {
     
     void setColors(){
     	parent.stroke(155);  // Floors are outlined
-    	parent.fill(155,155); // levels are transparent grey
+    	parent.fill(155,100); // levels are transparent grey
     }
     
 }
