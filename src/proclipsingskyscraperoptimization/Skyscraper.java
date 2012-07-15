@@ -14,7 +14,7 @@ public class Skyscraper {
     
     int skyscraperWidth = 100*feet;
     int skyscraperDepth = 100*feet;
-    int colSize, rowSize;
+    int colSize, rowSize, beamColSize, beamRowSize;
     
     PApplet parent; // The parent PApplet that we will render ourselves onto
     
@@ -68,8 +68,8 @@ public class Skyscraper {
    }
    
    public void initBeam(int numLevels, PApplet p ){
-	   colSize = myColumnGrid.myNSLines.size()-2;
-	   rowSize = myColumnGrid.myEWLines.size()-3;
+	   beamColSize = myColumnGrid.myNSLines.size()-2;
+	   beamRowSize = myColumnGrid.myEWLines.size()-3;
 	   myNSBeam = new Beam[colSize][rowSize][numLevels-1];
 	   myEWBeam = new Beam[colSize][rowSize][numLevels-1];
 	   parent = p;
