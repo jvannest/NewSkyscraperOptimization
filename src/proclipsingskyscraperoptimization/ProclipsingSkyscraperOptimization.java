@@ -30,10 +30,6 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	Slider sl1;
 	Slider sl2;
 
-	
-	
-	
-
 	int numLevels = 15;
 
 
@@ -68,7 +64,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		prePeasy();
 		mySkyscraper.draw();
 		//controlP5.setAutoDraw(false);
-		gui();
+		//gui();
 	}
 	
 	void prePeasy(){

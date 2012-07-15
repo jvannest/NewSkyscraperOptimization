@@ -20,7 +20,7 @@ public class Beam {
 		parent = p;
 		myLevel = l;
 		myColumn = col;
-		xb=(myColumnGrid.typicalGridDist)-(cw/2);
+		xb=(myColumnGrid.typicalGridDist)-(cw);
 		yb=1*feet;
 		zb=1*feet;
 	}
@@ -33,7 +33,7 @@ public class Beam {
 	void drawBeamStruct(){
 		setColors();
     	parent.pushMatrix();
-    	parent.translate((cw/2)+myColumn.ns-(bw/2), myColumn.ew-(bw/2), myLevel.elevation); 
+    	parent.translate((xb/2)+(cw/2)+myColumn.ns-(bw/2), myColumn.ew-(bw/2), myLevel.elevation); 
     	parent.box(xb, yb, zb); 
     	parent.popMatrix();
 	}

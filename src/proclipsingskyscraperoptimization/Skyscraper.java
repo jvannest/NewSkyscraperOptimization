@@ -35,9 +35,9 @@ public class Skyscraper {
     }
   
     public void draw(){
-    	//myLevelStack.drawStack();
+    	myLevelStack.drawStack();
     	myColumnGrid.drawGrid();
-    	//drawFloors();
+    	drawFloors();
     	drawColumns();
     	drawBeams();
     	//myStairs.draw();
@@ -68,8 +68,8 @@ public class Skyscraper {
    }
    
    public void initBeam(int numLevels, PApplet p ){
-	   beamColSize = myColumnGrid.myNSLines.size()-2;
-	   beamRowSize = myColumnGrid.myEWLines.size()-3;
+	   beamColSize = myColumnGrid.myNSLines.size()-1;
+	   beamRowSize = myColumnGrid.myEWLines.size();
 	   myNSBeam = new Beam[colSize][rowSize][numLevels-1];
 	   myEWBeam = new Beam[colSize][rowSize][numLevels-1];
 	   parent = p;
@@ -97,9 +97,9 @@ public class Skyscraper {
  	   }
     }
     public void drawBeams(){
-    	for(int i = 0; i<13; i++){
- 		   for (int j = 0; j<rowSize; j++){
- 			   for (int k=0; k<rowSize; k++){
+    	for(int i = 0; i<14; i++){
+ 		   for (int j = 0; j<beamColSize; j++){
+ 			   for (int k=0; k<beamRowSize; k++){
  				  myNSBeam[j][k][i].drawBeam();
  				  parent.pushMatrix();
  				  parent.rotateZ(PApplet.PI/2);
