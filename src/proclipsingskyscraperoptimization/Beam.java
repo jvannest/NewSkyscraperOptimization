@@ -11,10 +11,11 @@ public class Beam {
 	Level myLevel;
 	
 	float xb, yb, zb, cw;
-	int bw;
+	int bw,ft;
 	static int feet = 12;
 
-	Beam(int b, Level l, Column col, PApplet p){
+	Beam(int flthickness, int b, Level l, Column col, PApplet p){
+		ft = flthickness;
 		cw= col.w;
 		bw = b;
 		parent = p;
@@ -33,7 +34,7 @@ public class Beam {
 	void drawBeamStruct(){
 		setColors();
     	parent.pushMatrix();
-    	parent.translate((xb/2)+(cw/2)+myColumn.ns-(bw/2), myColumn.ew-(bw/2), myLevel.elevation); 
+    	parent.translate((xb/2)+(cw/2)+myColumn.ns-(bw/2), myColumn.ew-(bw/2), myLevel.elevation-ft); 
     	parent.box(xb, yb, zb); 
     	parent.popMatrix();
 	}
