@@ -41,8 +41,8 @@ public class Floor {
     }
     
     void setColors(){
-    	parent.stroke(155);  // Floors are outlined
-    	parent.fill(155,100); // levels are transparent grey
+    	parent.stroke(80);  // Floors are outlined
+    	parent.fill(155,255); // levels are transparent grey
     }
     
 }
