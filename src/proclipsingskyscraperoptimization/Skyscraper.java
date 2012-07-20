@@ -24,6 +24,7 @@ public class Skyscraper {
     Floor[] myFloors;
     Column[][][] myColumn;
     Beam[][][] myNSBeam,myEWBeam;
+    TextOutput write;
 
     public Skyscraper ( int numLevels, PApplet p){
     	parent = p;
@@ -32,6 +33,7 @@ public class Skyscraper {
     	initFloors(numLevels, parent);
     	initColumn(numLevels, parent);
     	initBeam(numLevels, parent);
+    	//write.writeFile();
     }
   
     public void draw(){
