@@ -64,7 +64,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		prePeasy();
 		mySkyscraper.draw();
 		//controlP5.setAutoDraw(false);
-		//gui();
+		gui();
 	}
 	
 	void prePeasy(){
@@ -74,12 +74,15 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	void gui() {
 		noSmooth();
 		//currCameraMatrix = new PMatrix3D(g3.camera);
-		camera();
+		
 		fill(155);
 		noStroke();
 		//rect(0, 0, guiWidth, guiHeight);
 		//controlP5.setAutoDraw(false);
+		
 		controlP5.draw();
+		camera();
+		
 		//g3.camera = currCameraMatrix;
 	}
 	

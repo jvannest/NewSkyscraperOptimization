@@ -53,6 +53,7 @@ public class Level {
     	parent.fill(50, 50, 50, 95);
     	parent.textSize(levelTextSize);
     	parent.text( (int)(elevation/feet) + " ' - " + (int)(elevation%feet) + " ''", 0, 0);
+    	System.out.println("Level: " +i+ "   Elevation:" +elevation);
     	parent.popMatrix(); 
     }
 
