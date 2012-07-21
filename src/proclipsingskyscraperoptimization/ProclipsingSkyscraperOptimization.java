@@ -23,7 +23,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	Skyscraper mySkyscraper;
 	
 	//ColumnGridLine temp,temp2;
-	ColumnGridLine temp;	
+	ColumnGridLine[] temp = new ColumnGridLine[2];	
 		
 	DropdownList cg1, cg2; //Create variable for DropdowLists
 
@@ -37,7 +37,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	
 	int guiWidth = 350;
 	int guiHeight = 900;
-
+	int[] glIndex = new int[2];
     
 	public void setup() {
 		size(1200,900, P3D);
@@ -53,7 +53,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		  
 		mySkyscraper = new Skyscraper(numLevels, this);
 		
-		//setupSliders();
+		setupSliders();
 		setupGrid(); //Calling New Method;
 
 	}
@@ -64,7 +64,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		prePeasy();
 		mySkyscraper.draw();
 		//controlP5.setAutoDraw(false);
-		//gui();
+		gui();
 	}
 	
 	void prePeasy(){
@@ -95,13 +95,15 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		 				//.setValue(mySkyscraper.myColumnGrid.typicalGridDist*(int)cg2.getValue())
 			            .setValue(0)
 		 				.setPosition(20,300)
-		 				.setSize(500,20);
+		 				.setSize(500,20)
+		 				.setVisible(false);
 
 		 sl2 = controlP5.addSlider("EditGridLineNS")
 		            .setRange(0,500)
 	 				.setValue(0)
 	 				.setPosition(20,350)
-	 				.setSize(500,20);
+	 				.setSize(500,20)
+		 			.setVisible(false);
 
 	
 		 
@@ -156,18 +158,19 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 
 	
 	public void EditGridLineEW(int theValue){
-		int p = (int) cg2.getValue();
-		temp = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(p);
-		temp.dist = theValue;
-		temp.name = Integer.toString(theValue);
+		glIndex[1] = (int) cg2.getValue();
+		temp[1] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(glIndex[1]);
+		//temp[1].dist = theValue;
+		//temp[1].name = Integer.toString(theValue);
 		System.out.println(theValue);
+		
 	}
 	
 	public void EditGridLineNS(int theValue){
-		int p = (int) cg1.getValue();
-		temp = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(p);
-		temp.dist = theValue;
-		temp.name = Integer.toString(theValue);
+		glIndex[0] = (int) cg1.getValue();
+		//temp[0] = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(p);
+		//temp[0].dist = theValue;
+		//temp[0].name = Integer.toString(theValue);
 		System.out.println(theValue);
 	}
 		
@@ -179,9 +182,29 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		  // if (theEvent.isGroup())
 		  // to avoid an error message thrown by controlP5.
 
-		  /*if (theEvent.isGroup()) {
+		  if (theEvent.isGroup()) {
 		    // check if the Event was triggered from a ControlGroup
-		    println("event from group : "+theEvent.getGroup().getValue()+" from "+theEvent.getGroup());
+			  String ddlName = theEvent.getName();
+			  glIndex[0] = (int) cg1.getValue();
+			  glIndex[1] = (int) cg2.getValue();
+			  //temp[0] = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(p);
+			  //temp[1] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(p);
+			  
+			  if (ddlName == " Move NS GridLine") {
+				  sl1.setVisible(false);
+				  temp[0] = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(glIndex[0]);
+				  sl2.setValue(temp[0].dist);
+				  sl2.setRange(temp[0].dist-250, temp[0].dist+250);
+				  sl2.setVisible(true);
+			  } else if (ddlName == " Move EW GridLine"){
+				  sl2.setVisible(false);
+				  temp[1] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(glIndex[1]);
+				  sl1.setRange(temp[1].dist-250, temp[1].dist+250);
+				  sl1.setValue(temp[1].dist);
+				  sl1.setVisible(true);
+			  }
+				  
+		    println("event from group : "+theEvent.getGroup().getValue()+" from "+theEvent.getGroup()+" "+ theEvent.getName());
 		  } 
 		  else if (theEvent.isController()) {
 		    println("event from controller : "+theEvent.getController().getValue()+" from "+theEvent.getController());
@@ -189,7 +212,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		  
 		  
 		  //Testing Listener and controlEvent
-		  if(theEvent.getGroup().getValue() == 1.0 && theEvent.getGroup() == cg1){
+		  /*if(theEvent.getGroup().getValue() == 1.0 && theEvent.getGroup() == cg1){
 			  println("Permission to edit Grid_Line 2 ");
 		  }
 		  
