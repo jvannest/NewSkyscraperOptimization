@@ -163,17 +163,17 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	public void EditGridLineEW(int theValue){
 		glIndex[1] = (int) cg2.getValue();
 		temp[1] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(glIndex[1]);
-		//temp[1].dist = theValue;
-		//temp[1].name = Integer.toString(theValue);
+		temp[1].dist = theValue;
+		temp[1].name = Integer.toString(theValue);
 		System.out.println(theValue);
 		
 	}
 	
 	public void EditGridLineNS(int theValue){
 		glIndex[0] = (int) cg1.getValue();
-		//temp[0] = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(p);
-		//temp[0].dist = theValue;
-		//temp[0].name = Integer.toString(theValue);
+		temp[0] = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(glIndex[0]);
+		temp[0].dist = theValue;
+		temp[0].name = Integer.toString(theValue);
 		System.out.println(theValue);
 	}
 		
@@ -190,20 +190,20 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 			  String ddlName = theEvent.getName();
 			  glIndex[0] = (int) cg1.getValue();
 			  glIndex[1] = (int) cg2.getValue();
-			  //temp[0] = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(p);
-			  //temp[1] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(p);
+			  temp[0] = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(glIndex[0]);
+			  temp[1] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(glIndex[1]);
+			  int NSdist = temp[0].dist;
+			  int EWdist = temp[1].dist; 
 			  
 			  if (ddlName == " Move NS GridLine") {
 				  sl1.setVisible(false);
-				  temp[0] = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(glIndex[0]);
-				  sl2.setValue(temp[0].dist);
-				  sl2.setRange(temp[0].dist-250, temp[0].dist+250);
+				  sl2.setValue(NSdist);
+				  sl2.setRange(NSdist-250, NSdist+250);
 				  sl2.setVisible(true);
 			  } else if (ddlName == " Move EW GridLine"){
 				  sl2.setVisible(false);
-				  temp[1] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(glIndex[1]);
-				  sl1.setRange(temp[1].dist-250, temp[1].dist+250);
-				  sl1.setValue(temp[1].dist);
+				  sl1.setValue(EWdist);
+				  sl1.setRange(EWdist-250, EWdist+250);
 				  sl1.setVisible(true);
 			  }
 				  
