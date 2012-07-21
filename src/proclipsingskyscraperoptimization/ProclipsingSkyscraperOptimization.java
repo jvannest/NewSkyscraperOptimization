@@ -101,7 +101,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		 sl2 = controlP5.addSlider("EditGridLineNS")
 		            .setRange(0,500)
 	 				.setValue(0)
-	 				.setPosition(20,350)
+	 				.setPosition(20,300)
 	 				.setSize(500,20)
 		 			.setVisible(false);
 
