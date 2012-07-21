@@ -190,7 +190,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 			  temp[0] = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(glIndex[0]);
 			  temp[1] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(glIndex[1]);
 			  int NSdist = temp[0].dist;
-			  int EWdist = temp[1].dist;
+			  int EWdist = temp[1].dist; 
 			  
 			  if (ddlName == " Move NS GridLine") {
 				  sl1.setVisible(false);
