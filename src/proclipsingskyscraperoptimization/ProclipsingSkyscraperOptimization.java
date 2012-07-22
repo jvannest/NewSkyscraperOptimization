@@ -4,7 +4,7 @@ package proclipsingskyscraperoptimization;
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
-
+import java.io.*;
 import processing.core.PApplet;
 import proclipsingskyscraperoptimization.Skyscraper;
 import peasy.*;
@@ -30,7 +30,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	Slider sl1;
 	Slider sl2;
 
-	int numLevels = 15;
+	int numLevels = 5;
 
 
 	int feet = 12;
@@ -38,7 +38,11 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	int guiWidth = 350;
 	int guiHeight = 900;
 	int[] glIndex = new int[2];
-    
+	
+	int[] NSdIndex; 
+	int[] EWdIndex;
+	PrintWriter output;
+	
 	public void setup() {
 		size(1200,900, P3D);
 		
@@ -53,6 +57,8 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		  
 		mySkyscraper = new Skyscraper(numLevels, this);
 		
+		output = createWriter("positions.txt");
+		
 		setupSliders();
 		setupGrid(); //Calling New Method;
 
@@ -60,13 +66,64 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 
 	public void draw() {
 		//background(MyListener.col);
+		
 		background(250);
 		prePeasy();
 		mySkyscraper.draw();
-		//controlP5.setAutoDraw(false);
+		//output.println("NSGridLine Number,EWGridLine Letter, Level, NSGridLine Position, EWGridLine Position, Level Elevation");
+		//for(int y =0; y< numLevels; y++){
+			//Level x = (Level) mySkyscraper.myLevelStack.myLevels.get(y);
+			   //for(int i = 0; i<mySkyscraper.myColumnGrid.myNSLines.size(); i++){
+				   //for (int j = 0; j<mySkyscraper.myColumnGrid.myNSLines.size(); j++){
+					// ColumnGridLine k = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(i);
+					// ColumnGridLine l = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(j);
+			        // int u = j+65;
+					    // Writes the remaining data to the file
+					    // Finishes the file
+			        // output.println((i+1)+","+(char)u+","+y+","+k.dist+","+l.dist+","+x.elevation);
+		
+				            // }
+				   
+			            //  }
+			  // output.close();
+			   
+						//}
 		gui();
 	}
+		
+		//controlP5.setAutoDraw(false);
+	 	
 	
+
+	public void keyPressed() {
+		
+		if (key =='a'){
+		  output.flush(); // Writes the remaining data to the file
+		   for(int y =0; y< numLevels; y++){
+			Level x = (Level) mySkyscraper.myLevelStack.myLevels.get(y);
+			   for(int i = 0; i<mySkyscraper.myColumnGrid.myNSLines.size(); i++){
+				   for (int j = 0; j<mySkyscraper.myColumnGrid.myNSLines.size(); j++){
+					ColumnGridLine k = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(i);
+					ColumnGridLine l = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(j);
+			         int u = j+65;
+					    // Writes the remaining data to the file
+					    // Finishes the file
+			        output.println((i+1)+","+(char)u+","+y+","+k.dist+","+l.dist+","+x.elevation);
+			        System.out.println((i+1)+","+(char)u+","+y+","+k.dist+","+l.dist+","+x.elevation);
+		
+				            }
+				   
+			            }
+			   
+			   
+						}
+		   output.close();
+		  
+		  
+		  
+		} // Stops the program
+		
+	}
 	void prePeasy(){
 		translate(0, 0, -2500);
 	}
@@ -74,14 +131,14 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	void gui() {
 		noSmooth();
 		//currCameraMatrix = new PMatrix3D(g3.camera);
-		
+		camera();
 		fill(155);
 		noStroke();
 		//rect(0, 0, guiWidth, guiHeight);
 		//controlP5.setAutoDraw(false);
 		
 		controlP5.draw();
-		camera();
+		
 		
 		//g3.camera = currCameraMatrix;
 	}
@@ -158,13 +215,16 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		    			//col = (int)theEvent2.getController().getValue();
 		// }
 	
-
+	
 	
 	public void EditGridLineEW(int theValue){
+		
 		glIndex[1] = (int) cg2.getValue();
 		temp[1] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(glIndex[1]);
 		temp[1].dist = theValue;
 		temp[1].name = Integer.toString(theValue);
+		EWdIndex = new int[mySkyscraper.myColumnGrid.myEWLines.size()];
+		EWdIndex[glIndex[1]] = temp[1].dist;
 		System.out.println(theValue);
 		
 	}
@@ -174,6 +234,8 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		temp[0] = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(glIndex[0]);
 		temp[0].dist = theValue;
 		temp[0].name = Integer.toString(theValue);
+		NSdIndex = new int[mySkyscraper.myColumnGrid.myNSLines.size()];
+		NSdIndex[glIndex[0]] = temp[0].dist;
 		System.out.println(theValue);
 	}
 		
@@ -194,14 +256,21 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 			  temp[1] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(glIndex[1]);
 			  int NSdist = temp[0].dist;
 			  int EWdist = temp[1].dist; 
+			 
 			  
 			  if (ddlName == " Move NS GridLine") {
-				  sl1.setVisible(false);
-				  sl2.setValue(NSdist);
-				  sl2.setRange(NSdist-250, NSdist+250);
-				  sl2.setVisible(true);
+					  sl1.setVisible(false);
+					  //if(glIndex[0]>0){
+						 // int minRangeNS = NSdIndex[glIndex[0]-1];
+					  sl2.setValue(NSdist);
+					  sl2.setRange(NSdist-250, NSdist+250);
+					  sl2.setVisible(true);
+				  	//}
+				  
 			  } else if (ddlName == " Move EW GridLine"){
 				  sl2.setVisible(false);
+				  //if(glIndex[1]>0){
+					  //int minRangeEW = EWdIndex[glIndex[1]-1];
 				  sl1.setValue(EWdist);
 				  sl1.setRange(EWdist-250, EWdist+250);
 				  sl1.setVisible(true);
@@ -234,4 +303,5 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
           
 
 	}
+//}
 //}

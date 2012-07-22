@@ -1,5 +1,5 @@
 package proclipsingskyscraperoptimization;
-
+//import java.io.*;
 import proclipsingskyscraperoptimization.LevelStack;
 import processing.core.PApplet;
 
@@ -9,6 +9,7 @@ public class Skyscraper {
     float x;
     float y;
     float radius;
+    
     
     int feet = 12;
     int numLevels;
@@ -24,7 +25,7 @@ public class Skyscraper {
     Floor[] myFloors;
     Column[][][] myColumn;
     Beam[][][] myNSBeam,myEWBeam;
-    TextOutput write;
+    //PrintWriter output;
 
     public Skyscraper ( int numLevels, PApplet p){
     	parent = p;
@@ -39,7 +40,7 @@ public class Skyscraper {
     public void draw(){
     	myLevelStack.drawStack();
     	myColumnGrid.drawGrid();
-    	drawFloors();
+    	//drawFloors();
     	drawColumns();
     	drawBeams();
     	//myStairs.draw();
@@ -67,7 +68,7 @@ public class Skyscraper {
 			   l = (ColumnGridLine) myColumnGrid.myEWLines.get(j);
 	           u = j+65;
 			   //System.out.println( "NS"+"  EW");
-			   System.out.println("["+(i+1)+"] "+"["+(char)u+"] : "+k.dist+","+l.dist);
+			   //System.out.println("["+(i+1)+"] "+"["+(char)u+"] : "+k.dist+","+l.dist);
 			   myColumn[i][j][y] = new Column( (Level)myLevelStack.myLevels.get(y+1), (Level)myLevelStack.myLevels.get(y), skyscraperWidth, k.dist, l.dist, p);
 		   }
 	   }
