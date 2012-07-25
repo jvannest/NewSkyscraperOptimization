@@ -11,7 +11,7 @@ public class ColumnGrid {
     ArrayList myEWLines;
     
     static int feet = 12;
-    static int typicalGridDist = (10*feet);
+    static int typicalGridDist = (25*feet);
     
     int gridWidth;
     int gridDepth;

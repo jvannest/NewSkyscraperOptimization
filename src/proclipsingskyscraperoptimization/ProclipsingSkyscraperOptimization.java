@@ -221,13 +221,13 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		
 		glIndex[1] = (int) cg2.getValue();
 		temp[1] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(glIndex[1]);
-		temp[3] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(glIndex[1]+1);
-		
         temp[1].dist = theValue;
-        temp[3].dist = theValue - temp[3].dist;
+        temp[3] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(glIndex[1]+1);
 		temp[1].name = Integer.toString(theValue);
+		temp[3].name = Integer.toString(temp[3].dist-(theValue-temp[3].dist));
 		EWdIndex = new int[mySkyscraper.myColumnGrid.myEWLines.size()];
 		EWdIndex[glIndex[1]] = temp[1].dist;
+		EWdIndex[glIndex[1]+1]=temp[3].dist;
 		//EWdIndex[glIndex[1]+1]=temp[3].dist;
 		System.out.println(theValue);
 		
@@ -240,7 +240,9 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		glIndex[0] = (int) cg1.getValue();
 		temp[0] = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(glIndex[0]);
 		temp[0].dist = theValue;
+		temp[2] = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(glIndex[0]+1);
 		temp[0].name = Integer.toString(theValue);
+		temp[2].name = Integer.toString(temp[2].dist-(theValue-temp[2].dist));
 		NSdIndex = new int[mySkyscraper.myColumnGrid.myNSLines.size()];
 		NSdIndex[glIndex[0]] = temp[0].dist;
 		System.out.println(theValue);
