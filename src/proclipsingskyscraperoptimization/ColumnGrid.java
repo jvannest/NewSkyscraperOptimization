@@ -35,6 +35,7 @@ public class ColumnGrid {
     }
     
     public void drawGrid(){
+    		parent.translate(-typicalGridDist, 0);
     	for (int i=0; i<myNSLines.size(); i++){
     		ColumnGridLine g = (ColumnGridLine) myNSLines.get(i);
     		g.drawGridLine(gridWidth, gridDepth);
@@ -45,7 +46,8 @@ public class ColumnGrid {
     	
     	parent.pushMatrix();
     	parent.rotateZ(PApplet.PI/2);
-    	parent.translate(0, gridDepth+typicalGridDist);
+    	parent.translate(0, gridDepth);
+    	parent.translate(-typicalGridDist, 0);
     	
     	for (int i=0; i<myEWLines.size(); i++){
     		ColumnGridLine g = (ColumnGridLine) myEWLines.get(i);

@@ -98,6 +98,7 @@ public class Skyscraper {
     }
     
     public void drawColumns(){
+    	parent.translate(ColumnGrid.typicalGridDist, 0);
     	parent.translate(-skyscraperWidth-ColumnGrid.typicalGridDist, 0);
     	for(int y=0; y<myFloors.length-1; y++){
     	for(int i = 0; i<colSize; i++){

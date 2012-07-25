@@ -23,7 +23,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	Skyscraper mySkyscraper;
 	
 	//ColumnGridLine temp,temp2;
-	ColumnGridLine[] temp = new ColumnGridLine[2];	
+	ColumnGridLine[] temp = new ColumnGridLine[4];	
 		
 	DropdownList cg1, cg2; //Create variable for DropdowLists
 
@@ -221,11 +221,18 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		
 		glIndex[1] = (int) cg2.getValue();
 		temp[1] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(glIndex[1]);
-		temp[1].dist = theValue;
+		temp[3] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(glIndex[1]+1);
+		
+        temp[1].dist = theValue;
+        temp[3].dist = theValue - temp[3].dist;
 		temp[1].name = Integer.toString(theValue);
 		EWdIndex = new int[mySkyscraper.myColumnGrid.myEWLines.size()];
 		EWdIndex[glIndex[1]] = temp[1].dist;
+		//EWdIndex[glIndex[1]+1]=temp[3].dist;
 		System.out.println(theValue);
+		
+		
+		
 		
 	}
 	
