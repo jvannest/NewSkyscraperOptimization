@@ -11,7 +11,7 @@ public class ColumnGrid {
     ArrayList myEWLines;
     
     static int feet = 12;
-    static int typicalGridDist = (25*feet);
+    static int typicalGridDist = (10*feet);
     
     int gridWidth;
     int gridDepth;
@@ -45,7 +45,7 @@ public class ColumnGrid {
     	
     	parent.pushMatrix();
     	parent.rotateZ(PApplet.PI/2);
-    	parent.translate(0, gridDepth);
+    	parent.translate(0, gridDepth+typicalGridDist);
     	
     	for (int i=0; i<myEWLines.size(); i++){
     		ColumnGridLine g = (ColumnGridLine) myEWLines.get(i);
