@@ -69,7 +69,7 @@ public class Skyscraper {
 	           u = j+65;
 			   //System.out.println( "NS"+"  EW");
 			   //System.out.println("["+(i+1)+"] "+"["+(char)u+"] : "+k.dist+","+l.dist);
-			   myColumn[i][j][y] = new Column( (Level)myLevelStack.myLevels.get(y+1), (Level)myLevelStack.myLevels.get(y), skyscraperWidth, k.dist, l.dist, p);
+			   myColumn[i][j][y] = new Column( (Level)myLevelStack.myLevels.get(y+1), (Level)myLevelStack.myLevels.get(y), skyscraperWidth, k.dist*i, l.dist*j, p);
 		   }
 	   }
 	   }
@@ -98,6 +98,7 @@ public class Skyscraper {
     }
     
     public void drawColumns(){
+    	parent.translate(-skyscraperWidth-ColumnGrid.typicalGridDist, 0);
     	for(int y=0; y<myFloors.length-1; y++){
     	for(int i = 0; i<colSize; i++){
  		   for (int j = 0; j<rowSize; j++){

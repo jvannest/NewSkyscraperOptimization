@@ -29,7 +29,8 @@ public class ColumnGridLine {
 		parent.pushMatrix();
 		parent.stroke(150);
 		parent.translate(-(w/2), 0 , 0);
-		parent.line(dist, (-length/2)-margin, dist, (length/2)+margin );
+		parent.line(0, (-length/2)-margin, 0, (length/2)+margin );
+		//parent.line(dist, (-length/2), dist, (length/2));
     	parent.fill(50, 50, 50, 155);
     	parent.textSize(gridTextSize);
     	parent.text(name,dist+2,(length/2)+margin);

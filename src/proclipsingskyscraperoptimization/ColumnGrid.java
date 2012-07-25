@@ -11,7 +11,7 @@ public class ColumnGrid {
     ArrayList myEWLines;
     
     static int feet = 12;
-    static int typicalGridDist = (10*feet);
+    static int typicalGridDist = (25*feet);
     
     int gridWidth;
     int gridDepth;
@@ -25,11 +25,11 @@ public class ColumnGrid {
     	
     	//Creates the size of the NS Array lines
     	for (int i=0; i<((gridDepth+typicalGridDist)/typicalGridDist); i++){ 
-    		myNSLines.add( new ColumnGridLine(i*typicalGridDist, parent) );
+    		myNSLines.add( new ColumnGridLine(typicalGridDist, parent) );
     	}
     	//Creates the size of the EW Array lines
     	for (int i=0; i<((gridWidth+typicalGridDist)/typicalGridDist); i++){
-    		myEWLines.add( new ColumnGridLine(i*typicalGridDist, parent) );
+    		myEWLines.add( new ColumnGridLine(typicalGridDist, parent) );
     	}
 
     }
@@ -39,16 +39,20 @@ public class ColumnGrid {
     		ColumnGridLine g = (ColumnGridLine) myNSLines.get(i);
     		g.drawGridLine(gridWidth, gridDepth);
     		g.drawGridLineName(gridWidth, i);
+    		parent.translate(typicalGridDist, 0);
     			
     	}
     	
     	parent.pushMatrix();
     	parent.rotateZ(PApplet.PI/2);
-    	//parent.translate(0, , typicalGridDist);
+    	parent.translate(0, gridDepth);
+    	
     	for (int i=0; i<myEWLines.size(); i++){
     		ColumnGridLine g = (ColumnGridLine) myEWLines.get(i);
+    		//parent.translate(0, gridWidth);
     		g.drawGridLine(gridWidth, gridDepth);
     		g.drawGridLineLetter(gridWidth, i);
+    		parent.translate(typicalGridDist, 0);
     		//g.drawGridLineLetter(typicalGridDist, i);
     	}
     	parent.popMatrix();
