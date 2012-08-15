@@ -23,14 +23,15 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	Skyscraper mySkyscraper;
 	
 	//ColumnGridLine temp,temp2;
-	ColumnGridLine[] temp = new ColumnGridLine[4];	
-		
+	ColumnGridLine[] temp = new ColumnGridLine[6];	
+	Column cols;
+	Beam EWbeams,NSbeams;
 	DropdownList cg1, cg2; //Create variable for DropdowLists
 
 	Slider sl1;
 	Slider sl2;
 
-	int numLevels = 5;
+	int numLevels = 14;
 
 
 	int feet = 12;
@@ -194,7 +195,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 			cg1.addItem(" Grid_Line "+i, i-1);
 		}
 		
-		for(int i=65; i<=mySkyscraper.myColumnGrid.myEWLines.size()+65; i++){
+		for(int i=65; i<=mySkyscraper.myColumnGrid.myEWLines.size()+64; i++){
 			
 			cg2.addItem(" Grid_Line "+(char)i, i-65);
 		}
@@ -218,20 +219,53 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	
 	
 	public void EditGridLineEW(int theValue){
-		
 		glIndex[1] = (int) cg2.getValue();
 		temp[1] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(glIndex[1]);
-        temp[1].dist = theValue;
-        temp[3] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(glIndex[1]+1);
+		if (glIndex[1]>=0 && glIndex[1]<mySkyscraper.myColumnGrid.myEWLines.size()-1){
+			temp[3] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(glIndex[1]+1);
+			temp[3].name = Integer.toString(temp[3].dist-(theValue-temp[3].dist));
+			for (int lvlNumbers = 0;lvlNumbers<numLevels-1;lvlNumbers++){
+				for (int zyx=0; zyx<mySkyscraper.myColumnGrid.myEWLines.size()-1;zyx++){
+					NSbeams = (Beam)mySkyscraper.myBeams.NSBeamLvl.get(lvlNumbers).get(glIndex[1]).get(zyx);
+					NSbeams.NSxb = temp[3].dist-(theValue-temp[3].dist);
+				}
+ 		    }
+		} else {
+			for (int lvlNumbers = 0;lvlNumbers<numLevels-1;lvlNumbers++){
+				for (int xyz=0; xyz<mySkyscraper.myColumnGrid.myNSLines.size()-1;xyz++){
+					for (int zyx=0; zyx<mySkyscraper.myColumnGrid.myEWLines.size()-1;zyx++){
+						//beams = (Beam)mySkyscraper.myBeams.EWBeamLvl.get(lvlNumbers).get(xyz).get(zyx);
+						//beams.EWDist = ((glIndex[1]-1)*mySkyscraper.myColumnGrid.typicalGridDist)+(theValue-mySkyscraper.myColumnGrid.typicalGridDist);
+					}
+				}
+ 		    }
+		//	temp[5] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(glIndex[1]-1);
+		//	temp[5].name = Integer.toString(temp[5].dist-(theValue-temp[5].dist));
+		}
+		
+		temp[1].dist = theValue;
+        for (int lvlNumbers = 0;lvlNumbers<numLevels-1;lvlNumbers++){
+			for (int xyz=0;xyz<mySkyscraper.myColumnGrid.myEWLines.size();xyz++){
+				cols = (Column)mySkyscraper.myColumns.ColumnLvl.get(lvlNumbers).get(xyz).get(glIndex[1]);
+    		    cols.ew = (glIndex[1]*mySkyscraper.myColumnGrid.typicalGridDist)+(theValue-mySkyscraper.myColumnGrid.typicalGridDist);
+    		    for (int zyx=0; zyx<mySkyscraper.myColumnGrid.myNSLines.size()-1;zyx++){
+    		    	EWbeams = (Beam)mySkyscraper.myBeams.EWBeamLvl.get(lvlNumbers).get(zyx).get(glIndex[1]);
+        		    EWbeams.EWDist = (glIndex[1]*mySkyscraper.myColumnGrid.typicalGridDist)+(theValue-mySkyscraper.myColumnGrid.typicalGridDist);
+        		    NSbeams = (Beam)mySkyscraper.myBeams.NSBeamLvl.get(lvlNumbers).get(glIndex[1]).get(zyx);
+					NSbeams.NSDist = (glIndex[1]*mySkyscraper.myColumnGrid.typicalGridDist)+(theValue-mySkyscraper.myColumnGrid.typicalGridDist);
+    		    }
+    		    
+    		    //System.out.println(glIndex[1]+", "+xyz+", "+lvlNumbers+":"+mySkyscraper.myColumns.ColumnCol.get(xyz).h);
+			}
+		}
+        
 		temp[1].name = Integer.toString(theValue);
-		temp[3].name = Integer.toString(temp[3].dist-(theValue-temp[3].dist));
+
 		EWdIndex = new int[mySkyscraper.myColumnGrid.myEWLines.size()];
-		EWdIndex[glIndex[1]] = temp[1].dist;
-		EWdIndex[glIndex[1]+1]=temp[3].dist;
+		//EWdIndex[glIndex[1]] = temp[1].dist;
 		//EWdIndex[glIndex[1]+1]=temp[3].dist;
-		System.out.println(theValue);
 		
-		
+		System.out.println((int) cg2.getValue());
 		
 		
 	}
@@ -240,11 +274,16 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		glIndex[0] = (int) cg1.getValue();
 		temp[0] = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(glIndex[0]);
 		temp[0].dist = theValue;
+		 for (int lvlNumbers = 0;lvlNumbers<numLevels-1;lvlNumbers++){
+				for (int xyz=0;xyz<mySkyscraper.myColumnGrid.myNSLines.size();xyz++){
+					cols = (Column)mySkyscraper.myColumns.ColumnLvl.get(lvlNumbers).get(glIndex[0]).get(xyz);
+	    		    cols.ns = (glIndex[0]*mySkyscraper.myColumnGrid.typicalGridDist)+(theValue-mySkyscraper.myColumnGrid.typicalGridDist);
+	    		    System.out.println(glIndex[0]+", "+xyz+", "+lvlNumbers+":"+mySkyscraper.myColumns.ColumnCol.get(xyz).h);
+				}
+			}
 		temp[2] = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(glIndex[0]+1);
 		temp[0].name = Integer.toString(theValue);
 		temp[2].name = Integer.toString(temp[2].dist-(theValue-temp[2].dist));
-		NSdIndex = new int[mySkyscraper.myColumnGrid.myNSLines.size()];
-		NSdIndex[glIndex[0]] = temp[0].dist;
 		System.out.println(theValue);
 	}
 		

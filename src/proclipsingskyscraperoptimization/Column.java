@@ -58,10 +58,5 @@ public class Column {
     	parent.stroke(155);  
     	parent.fill(250,0,0,155);
     }
-    
-    void drawColumnData(){
-    	
-    }
-    	
-	
+
 }

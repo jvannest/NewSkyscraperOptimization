@@ -22,27 +22,30 @@ public class Skyscraper {
     LevelStack myLevelStack;
     ColumnGrid myColumnGrid;
     Columns myColumns;
+    Beams myBeams;
     Floor[] myFloors;
-    Column[][][] myColumn;
-    Beam[][][] myNSBeam,myEWBeam;
     //PrintWriter output;
 
     public Skyscraper ( int numLevels, PApplet p){
     	parent = p;
     	myLevelStack = new LevelStack(numLevels, parent); 
-    	myColumnGrid = new ColumnGrid(skyscraperWidth, skyscraperDepth, parent); 
     	initFloors(numLevels, parent);
-    	initColumn(numLevels, parent);
-    	initBeam(numLevels, parent);
+    	myColumnGrid = new ColumnGrid(skyscraperWidth, skyscraperDepth, parent);
+    	myColumns = new Columns(myColumnGrid.myNSLines.size(), myColumnGrid.myEWLines.size(), myLevelStack, skyscraperWidth, myColumnGrid.myEWLines, myColumnGrid.myNSLines, parent);
+    	myBeams = new Beams( myLevelStack.typicalLevelHeight,myColumnGrid.myEWLines, myColumnGrid.myNSLines, myColumnGrid.myNSLines.size()-1, myColumnGrid.myEWLines.size(), myColumns.ColumnLvl, numLevels-1, skyscraperWidth, p);
+    	//initColumn(numLevels, parent);
+    	//initBeam(numLevels, parent);
     	//write.writeFile();
     }
   
     public void draw(){
     	myLevelStack.drawStack();
     	myColumnGrid.drawGrid();
+    	myColumns.drawColumn();
+    	myBeams.drawBeams();
     	//drawFloors();
-    	drawColumns();
-    	drawBeams();
+    	//drawColumns();
+    	//drawBeams();
     	//myStairs.draw();
     }
     
@@ -54,7 +57,7 @@ public class Skyscraper {
     	}
     }
    
-   public void initColumn(int numLevels, PApplet p){
+   /*public void initColumn(int numLevels, PApplet p){
 	   parent = p;
 	   colSize = myColumnGrid.myNSLines.size();
 	   rowSize = myColumnGrid.myEWLines.size();
@@ -62,16 +65,16 @@ public class Skyscraper {
 	   int u;
 	   myColumn = new Column[colSize][rowSize][numLevels-1];
 	   for(int y =0; y< numLevels-1; y++){
-	   for(int i = 0; i<colSize; i++){
-		   for (int j = 0; j<rowSize; j++){
-			   k = (ColumnGridLine) myColumnGrid.myNSLines.get(i);
-			   l = (ColumnGridLine) myColumnGrid.myEWLines.get(j);
-	           u = j+65;
-			   //System.out.println( "NS"+"  EW");
-			   //System.out.println("["+(i+1)+"] "+"["+(char)u+"] : "+k.dist+","+l.dist);
-			   myColumn[i][j][y] = new Column( (Level)myLevelStack.myLevels.get(y+1), (Level)myLevelStack.myLevels.get(y), skyscraperWidth, k.dist*i, l.dist*j, p);
+		   for(int i = 0; i<colSize; i++){
+			   for (int j = 0; j<rowSize; j++){
+				   k = (ColumnGridLine) myColumnGrid.myNSLines.get(i);
+				   l = (ColumnGridLine) myColumnGrid.myEWLines.get(j);
+				   u = j+65;
+				   //System.out.println( "NS"+"  EW");
+				   //System.out.println("["+(i+1)+"] "+"["+(char)u+"] : "+k.dist+","+l.dist);
+				   myColumn[i][j][y] = new Column( (Level)myLevelStack.myLevels.get(y+1), (Level)myLevelStack.myLevels.get(y), skyscraperWidth, k.dist*i, l.dist*j, p);
+			   }
 		   }
-	   }
 	   }
    }
    
@@ -89,7 +92,7 @@ public class Skyscraper {
 			   }
 		   }
 	   }
-   }
+   }*/
     
     public void drawFloors(){
     	for(int i=0; i<myFloors.length; i++){
@@ -97,15 +100,15 @@ public class Skyscraper {
     	}
     }
     
-    public void drawColumns(){
+    /*public void drawColumns(){
     	parent.translate(ColumnGrid.typicalGridDist, 0);
     	parent.translate(-skyscraperWidth-ColumnGrid.typicalGridDist, 0);
     	for(int y=0; y<myFloors.length-1; y++){
-    	for(int i = 0; i<colSize; i++){
- 		   for (int j = 0; j<rowSize; j++){
- 			   myColumn[i][j][y].drawColumn();
- 		   }
- 	   }
+    		for(int i = 0; i<colSize; i++){
+    			for (int j = 0; j<rowSize; j++){
+    				myColumn[i][j][y].drawColumn();
+    			}
+    		}
     	}
     }
     public void drawBeams(){
@@ -120,5 +123,5 @@ public class Skyscraper {
  			   }
  		   }
  	   }
-    }
+    }*/
 }
