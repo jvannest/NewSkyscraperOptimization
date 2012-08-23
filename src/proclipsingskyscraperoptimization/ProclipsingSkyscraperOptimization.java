@@ -16,6 +16,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	
 	PeasyCam cam;
 	ControlP5 controlP5;
+	
 	//MyControlListener MyListener;
 	//PMatrix3D currCameraMatrix;
 	//PGraphics3D g3; 
@@ -25,7 +26,8 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	//ColumnGridLine temp,temp2;
 	ColumnGridLine[] temp = new ColumnGridLine[6];	
 	Column cols;
-	Beam EWbeams,NSbeams;
+	Beam[] EWbeams = new Beam[2];
+	Beam[] NSbeams = new Beam[2];
 	DropdownList cg1, cg2; //Create variable for DropdowLists
 
 	Slider sl1;
@@ -42,7 +44,9 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	
 	int[] NSdIndex; 
 	int[] EWdIndex;
-	PrintWriter output;
+	PrintWriter newOutput, output;
+	BufferedReader reader;
+	String readLine;
 	
 	public void setup() {
 		size(1200,900, P3D);
@@ -57,9 +61,9 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		//controlP5.setControlFont(p);
 		  
 		mySkyscraper = new Skyscraper(numLevels, this);
-		
+		/*
 		output = createWriter("positions.txt");
-		
+		*/
 		setupSliders();
 		setupGrid(); //Calling New Method;
 
@@ -97,32 +101,72 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	
 
 	public void keyPressed() {
-		
+		/*
 		if (key =='a'){
-		  output.flush(); // Writes the remaining data to the file
-		   for(int y =0; y< numLevels; y++){
-			Level x = (Level) mySkyscraper.myLevelStack.myLevels.get(y);
-			   for(int i = 0; i<mySkyscraper.myColumnGrid.myNSLines.size(); i++){
-				   for (int j = 0; j<mySkyscraper.myColumnGrid.myNSLines.size(); j++){
-					ColumnGridLine k = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(i);
-					ColumnGridLine l = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(j);
-			         int u = j+65;
-					    // Writes the remaining data to the file
-					    // Finishes the file
-			        output.println((i+1)+","+(char)u+","+y+","+k.dist+","+l.dist+","+x.elevation);
-			        System.out.println((i+1)+","+(char)u+","+y+","+k.dist+","+l.dist+","+x.elevation);
-		
-				            }
-				   
-			            }
+			output.flush(); // Writes the remaining data to the file
+			
+			for(int y =0; y< numLevels; y++){
+				Level x = (Level) mySkyscraper.myLevelStack.myLevels.get(y);
+				for(int i = 0; i<mySkyscraper.myColumnGrid.myNSLines.size(); i++){
+					for (int j = 0; j<mySkyscraper.myColumnGrid.myNSLines.size(); j++){
+						ColumnGridLine k = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(i);
+						ColumnGridLine l = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(j);
+						int u = j+65;
+						// Writes the remaining data to the file
+						// Finishes the file
+						output.println((i+1)+","+(char)u+","+y+","+k.dist+","+l.dist+","+x.elevation);
+						System.out.println((i+1)+","+(char)u+","+y+","+k.dist+","+l.dist+","+x.elevation);
+					}
+				}
 			   
-			   
-						}
-		   output.close();
-		  
+			}
+			output.close();
+		  	
+			
 		  
 		  
 		} // Stops the program
+		*/
+		if (key == 'n'){
+			newOutput = createWriter("dataout.txt");
+			newOutput.flush(); // Writes the remaining data to the file
+			
+			for(int y =0; y< numLevels; y++){
+				Level x = (Level) mySkyscraper.myLevelStack.myLevels.get(y);
+				for(int i = 0; i<mySkyscraper.myColumnGrid.myNSLines.size(); i++){
+					for (int j = 0; j<mySkyscraper.myColumnGrid.myNSLines.size(); j++){
+						ColumnGridLine k = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(i);
+						ColumnGridLine l = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(j);
+						int u = j+65;
+						// Writes the remaining data to the file
+						// Finishes the file
+						newOutput.println((i+1)+","+k.dist+","+(char)u+","+l.dist+","+x.elevation);
+						System.out.println((i+1)+","+k.dist+","+(char)u+","+l.dist+","+x.elevation);
+					}
+				}
+			   
+			}
+			newOutput.close();
+		}
+		
+		if (key == 'o'){
+			try {
+				reader = createReader("dataout.txt");
+			    readLine = reader.readLine();
+			  } catch (IOException e) {
+			    e.printStackTrace();
+			    readLine = null;
+			  }
+			  if (readLine == null) {
+			    // Stop reading because of an error or file is empty
+			    noLoop();  
+			  } else {
+			    String[] pieces = split(readLine, TAB);
+			    int x = Integer.parseInt(pieces[0]);
+			    int y = Integer.parseInt(pieces[1]);
+			    point(x, y);
+			  }
+		}
 		
 	}
 	void prePeasy(){
@@ -145,12 +189,12 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	}
 	
 	void setupSliders() {
-		  controlP5.addSlider("VAR 1", 0, 3, 2, 20, 50, 200, 20);
+		/*  controlP5.addSlider("VAR 1", 0, 3, 2, 20, 50, 200, 20);
 		  controlP5.addSlider("VAR 2", 0, 3, 2, 20, 75, 200, 20);
 		  controlP5.addSlider("VAR 3", 0, 4, 3, 20, 100, 200, 20);
 		  controlP5.addSlider("VAR 4", 0, 300, 100, 20, 125, 200, 20);
 		 //new slider for moving Grid Line
-
+		*/
 		 sl1 = controlP5.addSlider("EditGridLineEW")
 			            .setRange(0,500)
 		 				//.setValue(mySkyscraper.myColumnGrid.typicalGridDist*(int)cg2.getValue())
@@ -206,53 +250,49 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		//cg2.setIndex(ColumnGrid.myEWLines.size());
 		
 	}
-	
-	//class MyControlListener implements ControlListener {
-		//int col;
-		  // public void controlEventSlider(ControlEvent theEvent2){ 
-			//System.out.println("i got an event from mySlider, " +
-			        //  "changing background color to "+
-			           // theEvent2.getController().getValue());      
-		    			//col = (int)theEvent2.getController().getValue();
-		// }
-	
-	
-	
+		
 	public void EditGridLineEW(int theValue){
 		glIndex[1] = (int) cg2.getValue();
 		temp[1] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(glIndex[1]);
-		if (glIndex[1]>=0 && glIndex[1]<mySkyscraper.myColumnGrid.myEWLines.size()-1){
+		temp[1].dist = theValue;
+		if (glIndex[1]>0 && glIndex[1]<mySkyscraper.myColumnGrid.myEWLines.size()-1){
 			temp[3] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(glIndex[1]+1);
-			temp[3].name = Integer.toString(temp[3].dist-(theValue-temp[3].dist));
+			temp[3].name = Integer.toString(temp[3].dist-(temp[1].dist-temp[3].dist));
+			for (int lvlNumbers = 0;lvlNumbers<numLevels-1;lvlNumbers++){
+				for (int zyx=0; zyx<mySkyscraper.myColumnGrid.myEWLines.size();zyx++){
+					NSbeams[0] = (Beam)mySkyscraper.myBeams.NSBeamLvl.get(lvlNumbers).get(glIndex[1]-1).get(zyx);
+					NSbeams[0].NSxb = (theValue);
+					NSbeams[1] = (Beam)mySkyscraper.myBeams.NSBeamLvl.get(lvlNumbers).get(glIndex[1]).get(zyx);
+					NSbeams[1].NSxb = temp[3].dist;
+					NSbeams[1] = (Beam)mySkyscraper.myBeams.NSBeamLvl.get(lvlNumbers).get(glIndex[1]).get(zyx);
+					NSbeams[1].NSDist = (glIndex[1]*mySkyscraper.myColumnGrid.typicalGridDist)+(theValue-mySkyscraper.myColumnGrid.typicalGridDist);
+				}
+ 		    }
+		} else if (glIndex[1]==0){
 			for (int lvlNumbers = 0;lvlNumbers<numLevels-1;lvlNumbers++){
 				for (int zyx=0; zyx<mySkyscraper.myColumnGrid.myEWLines.size()-1;zyx++){
-					NSbeams = (Beam)mySkyscraper.myBeams.NSBeamLvl.get(lvlNumbers).get(glIndex[1]).get(zyx);
-					NSbeams.NSxb = temp[3].dist-(theValue-temp[3].dist);
+					NSbeams[0] = (Beam)mySkyscraper.myBeams.NSBeamLvl.get(lvlNumbers).get(glIndex[1]).get(zyx);
+					NSbeams[0].NSxb = (temp[1].dist);
+					NSbeams[1] = (Beam)mySkyscraper.myBeams.NSBeamLvl.get(lvlNumbers).get(glIndex[1]).get(zyx);
+					NSbeams[1].NSDist = (glIndex[1]*mySkyscraper.myColumnGrid.typicalGridDist)+(theValue-mySkyscraper.myColumnGrid.typicalGridDist);
 				}
  		    }
-		} else {
+		}else if (glIndex[1] == mySkyscraper.myColumnGrid.myEWLines.size()-1){
 			for (int lvlNumbers = 0;lvlNumbers<numLevels-1;lvlNumbers++){
-				for (int xyz=0; xyz<mySkyscraper.myColumnGrid.myNSLines.size()-1;xyz++){
-					for (int zyx=0; zyx<mySkyscraper.myColumnGrid.myEWLines.size()-1;zyx++){
-						//beams = (Beam)mySkyscraper.myBeams.EWBeamLvl.get(lvlNumbers).get(xyz).get(zyx);
-						//beams.EWDist = ((glIndex[1]-1)*mySkyscraper.myColumnGrid.typicalGridDist)+(theValue-mySkyscraper.myColumnGrid.typicalGridDist);
-					}
+				for (int zyx=0; zyx<mySkyscraper.myColumnGrid.myEWLines.size();zyx++){
+					NSbeams[1] = (Beam)mySkyscraper.myBeams.NSBeamLvl.get(lvlNumbers).get(glIndex[1]-1).get(zyx);
+					NSbeams[1].NSxb = (temp[1].dist);
 				}
  		    }
-		//	temp[5] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(glIndex[1]-1);
-		//	temp[5].name = Integer.toString(temp[5].dist-(theValue-temp[5].dist));
 		}
 		
-		temp[1].dist = theValue;
         for (int lvlNumbers = 0;lvlNumbers<numLevels-1;lvlNumbers++){
 			for (int xyz=0;xyz<mySkyscraper.myColumnGrid.myEWLines.size();xyz++){
 				cols = (Column)mySkyscraper.myColumns.ColumnLvl.get(lvlNumbers).get(xyz).get(glIndex[1]);
     		    cols.ew = (glIndex[1]*mySkyscraper.myColumnGrid.typicalGridDist)+(theValue-mySkyscraper.myColumnGrid.typicalGridDist);
     		    for (int zyx=0; zyx<mySkyscraper.myColumnGrid.myNSLines.size()-1;zyx++){
-    		    	EWbeams = (Beam)mySkyscraper.myBeams.EWBeamLvl.get(lvlNumbers).get(zyx).get(glIndex[1]);
-        		    EWbeams.EWDist = (glIndex[1]*mySkyscraper.myColumnGrid.typicalGridDist)+(theValue-mySkyscraper.myColumnGrid.typicalGridDist);
-        		    NSbeams = (Beam)mySkyscraper.myBeams.NSBeamLvl.get(lvlNumbers).get(glIndex[1]).get(zyx);
-					NSbeams.NSDist = (glIndex[1]*mySkyscraper.myColumnGrid.typicalGridDist)+(theValue-mySkyscraper.myColumnGrid.typicalGridDist);
+    		    	EWbeams[0] = (Beam)mySkyscraper.myBeams.EWBeamLvl.get(lvlNumbers).get(zyx).get(glIndex[1]);
+        		    EWbeams[0].EWDist = (glIndex[1]*mySkyscraper.myColumnGrid.typicalGridDist)+(theValue-mySkyscraper.myColumnGrid.typicalGridDist);
     		    }
     		    
     		    //System.out.println(glIndex[1]+", "+xyz+", "+lvlNumbers+":"+mySkyscraper.myColumns.ColumnCol.get(xyz).h);
