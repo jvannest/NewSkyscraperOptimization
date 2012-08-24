@@ -85,6 +85,10 @@
 	<classpathentry kind="lib" path="lib/base/controlP5/library/controlP5.jar"/>
 	<classpathentry kind="lib" path="lib/base/anar/anar.jar"/>
 	<classpathentry kind="lib" path="lib/base/anar/TraerAnar.jar"/>
+	<classpathentry kind="lib" path="lib/gluegen-rt.dll"/>
+	<classpathentry kind="lib" path="lib/jogl_awt.dll"/>
+	<classpathentry kind="lib" path="lib/jogl_cg.dll"/>
+	<classpathentry kind="lib" path="lib/jogl.dll"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

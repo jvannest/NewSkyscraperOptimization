@@ -37,7 +37,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	Slider sl1;
 	Slider sl2;
 
-	int numLevels = 7;
+	int numLevels = 3;
 
 
 	int feet = 12;
@@ -53,7 +53,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	String readLine;
 	
 	public void setup() {
-		size(1200,900, OPENGL);
+		size(1200,900, P3D);
 		g3 = (PGraphics3D)g;
 		cam = new PeasyCam(this, 300*feet);
 		cam.setMinimumDistance(2*feet);
