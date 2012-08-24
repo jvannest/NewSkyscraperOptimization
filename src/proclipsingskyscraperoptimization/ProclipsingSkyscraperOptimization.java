@@ -37,7 +37,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	Slider sl1;
 	Slider sl2;
 
-	int numLevels = 3;
+	int numLevels = 13;
 
 
 	int feet = 12;
@@ -178,10 +178,10 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	}
 	
 	void setupSliders() {
-		  //controlP5.addSlider("VAR 1", 0, 3, 2, 20, 50, 200, 20);
-		  //controlP5.addSlider("VAR 2", 0, 3, 2, 20, 75, 200, 20);
-		  //controlP5.addSlider("VAR 3", 0, 4, 3, 20, 100, 200, 20);
-		  //controlP5.addSlider("VAR 4", 0, 300, 100, 20, 125, 200, 20);
+		  controlP5.addSlider("VAR 1", 0, 3, 2, 20, 50, 200, 20);
+		  controlP5.addSlider("VAR 2", 0, 3, 2, 20, 75, 200, 20);
+		  controlP5.addSlider("VAR 3", 0, 4, 3, 20, 100, 200, 20);
+		  controlP5.addSlider("VAR 4", 0, 300, 100, 20, 125, 200, 20);
 		
 		  //new slider for moving Grid Line
 		 sl1 = controlP5.addSlider("EditGridLineEW")
