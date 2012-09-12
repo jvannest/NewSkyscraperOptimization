@@ -37,7 +37,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	Slider sl1;
 	Slider sl2;
 
-	int numLevels = 13;
+	int numLevels = 5;
 
 
 	int feet = 12;
@@ -133,8 +133,8 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 						int u = j+65;
 						// Writes the remaining data to the file
 						// Finishes the file
-						newOutput.println((i+1)+","+k.dist+","+(char)u+","+l.dist+","+x.elevation);
-						System.out.println((i+1)+","+k.dist+","+(char)u+","+l.dist+","+x.elevation);
+						newOutput.println((i+1)+","+k.dist+","+(char)u+","+l.dist+","+y+","+x.elevation);
+						System.out.println((i+1)+","+k.dist+","+(char)u+","+l.dist+","+y+","+x.elevation);
 					}
 				}
 			   
@@ -367,5 +367,3 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	}
           
 }
-//}
-//}
