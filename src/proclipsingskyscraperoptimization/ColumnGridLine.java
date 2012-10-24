@@ -62,6 +62,21 @@ public class ColumnGridLine {
 	    	parent.popMatrix();
 	 }
 	 
+	 public boolean locked(int x){
+		 if (x==1){
+			 return true;
+		 }else{
+			 return false;
+		 }
+	 }
+	 public boolean pinned(int x){
+		 if (x==2){
+			 return true;
+		 }else{
+			 return false;
+		 }
+	 }
+	 
 	 public void drawColumn(int w){
 			setColors();
 	    	parent.pushMatrix();

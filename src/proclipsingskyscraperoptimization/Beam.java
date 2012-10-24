@@ -13,9 +13,10 @@ public class Beam {
 	//Level myLevel;
 	int myLevel;
 	
-	float EWxb, NSxb, yb, zb, cw;
+	float EWxb, NSxb, cw;//yb, zb, cw;
 	int bw,ft, EWDist, NSDist;
 	static int feet = 12;
+	static int depth = 1*feet;
 
 	Beam(int flthickness, int b, int l, Column col, ColumnGridLine ew, ColumnGridLine ns, int ewdist, int nsdist, PApplet p){
 		ft = flthickness;
@@ -28,8 +29,6 @@ public class Beam {
 		NSxb=ns.dist-cw;
 		EWDist = ewdist;
 		NSDist = nsdist;
-		yb=1*feet;
-		zb=1*feet;
 	}
 	
 	void drawBeam(){
@@ -42,7 +41,7 @@ public class Beam {
 		setColors();
     	parent.pushMatrix();
     	parent.translate((EWxb/2)+(cw/2)+NSDist-(bw/2), EWDist-(bw/2), myLevel-ft); 
-    	parent.box(EWxb, yb, zb); 
+    	parent.box(EWxb, depth, depth); 
     	parent.popMatrix();
 	}
 	
@@ -50,13 +49,17 @@ public class Beam {
 		setColors();
     	parent.pushMatrix();
     	parent.translate(EWDist-(bw/2), (NSxb/2)+(cw/2)+NSDist-(bw/2), myLevel-ft); 
-    	parent.box(yb, NSxb, zb); 
+    	parent.box(depth, NSxb, depth); 
     	parent.popMatrix();
 	}
 	
 	void setColors() {
 		parent.stroke(55);  
     	parent.fill(250,0,0,155);
+	}
+	
+	int getDepth() {
+		return depth;
 	}
 
 }
