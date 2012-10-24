@@ -37,18 +37,19 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	Slider sl1;
 	Slider sl2;
 
-	int numLevels = 5;
+	int numLevels = 13;
 
 
 	int feet = 12;
 	
 	int guiWidth = 350;
 	int guiHeight = 900;
+	int pc,lc;
 	int[] glIndex = new int[2];
 	
 	int[] NSdIndex; 
 	int[] EWdIndex;
-	PrintWriter newOutput, output;
+	PrintWriter newOutput, pinNLock, beamOutput, output;
 	BufferedReader reader;
 	String readLine;
 	
@@ -140,6 +141,50 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 			   
 			}
 			newOutput.close();
+			
+			beamOutput = createWriter("beamout.text");
+			beamOutput.flush();
+			// beamout.txt output will be LevelNumber, Axis, EndPoint1, EndPoint2, BeamDepth
+			for(int y = 0; y< numLevels; y++){
+				for(int i = 0; i<mySkyscraper.myColumnGrid.myNSLines.size(); i++){
+					for (int j = 0; j<mySkyscraper.myColumnGrid.myEWLines.size()-1; j++){
+						int u = j+65;
+						int v = u+1;
+						newOutput.println(y+","+(i+1)+","+(char)u+","+(char)v+","+1);
+						System.out.println(y+","+(i+1)+","+(char)u+","+(char)v+","+1);
+					}
+				}
+				for(int i = 0; i<mySkyscraper.myColumnGrid.myEWLines.size(); i++){
+					for (int j = 0; j<mySkyscraper.myColumnGrid.myNSLines.size()-1; j++){
+						int u = i+65;
+						int v = u+1;
+						newOutput.println(y+","+(char)u+","+(j+1)+","+(j+2)+","+1);
+						System.out.println(y+","+(char)u+","+(j+1)+","+(j+2)+","+1);
+					}
+				}
+			}
+			
+			pinNLock = createWriter("pinLock.txt");
+			pinNLock.flush();
+			
+			for(int x = 0; x<numLevels; x++){
+				Level y = (Level) mySkyscraper.myLevelStack.myLevels.get(x);
+				for(int i = 0; i<mySkyscraper.myColumnGrid.myNSLines.size(); i++){
+					//if(locked){
+					//lc=-1
+					//}
+					//else{
+					//lc=1
+					//}
+					pinNLock.println((i+1)+","+-1+","+-2+","+x);
+				}
+				for (int j = 0; j<mySkyscraper.myColumnGrid.myNSLines.size(); j++){
+					
+					int u = j+65;
+					pinNLock.println((char)u+","+-1+","+-2+","+x);
+				}
+			}
+			pinNLock.close();
 		}
 		
 		if (key == 'o'){
