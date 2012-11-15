@@ -142,7 +142,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 			}
 			newOutput.close();
 			
-			beamOutput = createWriter("beamout.text");
+			beamOutput = createWriter("beamout.txt");
 			beamOutput.flush();
 			// beamout.txt output will be LevelNumber, Axis, EndPoint1, EndPoint2, BeamDepth
 			for(int y = 0; y< numLevels; y++){
@@ -150,7 +150,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 					for (int j = 0; j<mySkyscraper.myColumnGrid.myEWLines.size()-1; j++){
 						int u = j+65;
 						int v = u+1;
-						newOutput.println(y+","+(i+1)+","+(char)u+","+(char)v+","+1);
+						beamOutput.println(y+","+(i+1)+","+(char)u+","+(char)v+","+1);
 						System.out.println(y+","+(i+1)+","+(char)u+","+(char)v+","+1);
 					}
 				}
@@ -158,11 +158,12 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 					for (int j = 0; j<mySkyscraper.myColumnGrid.myNSLines.size()-1; j++){
 						int u = i+65;
 						int v = u+1;
-						newOutput.println(y+","+(char)u+","+(j+1)+","+(j+2)+","+1);
+						beamOutput.println(y+","+(char)u+","+(j+1)+","+(j+2)+","+1);
 						System.out.println(y+","+(char)u+","+(j+1)+","+(j+2)+","+1);
 					}
 				}
 			}
+			beamOutput.close();
 			
 			pinNLock = createWriter("pinLock.txt");
 			pinNLock.flush();
