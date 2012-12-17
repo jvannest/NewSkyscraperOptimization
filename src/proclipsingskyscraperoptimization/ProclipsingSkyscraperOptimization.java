@@ -121,6 +121,16 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 			output.close();
 		} // Stops the program
 		*/
+		
+		if (key == 'r'){
+			for (int lvlNumbers = 0;lvlNumbers<numLevels-1;lvlNumbers++){
+				for (int zyx=0; zyx<mySkyscraper.myColumnGrid.myEWLines.size();zyx++){
+					NSbeams[1] = (Beam)mySkyscraper.myBeams.NSBeamLvl.get(lvlNumbers).get(3).get(zyx);
+					NSbeams[1].NSxb += 20;
+				}
+ 		    }
+		}
+		
 		if (key == 'n'){
 			newOutput = createWriter("dataout.txt");
 			newOutput.flush(); // Writes the remaining data to the file
@@ -189,22 +199,10 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		}
 		
 		if (key == 'o'){
-			try {
-				reader = createReader("dataout.txt");
-			    readLine = reader.readLine();
-			  } catch (IOException e) {
-			    e.printStackTrace();
-			    readLine = null;
-			  }
-			  if (readLine == null) {
-			    // Stop reading because of an error or file is empty
-			    noLoop();  
-			  } else {
-			    String[] pieces = split(readLine, TAB);
-			    int x = Integer.parseInt(pieces[0]);
-			    int y = Integer.parseInt(pieces[1]);
-			    point(x, y);
-			  }
+			Read read = new Read();
+			read.beamOutput("beamout.txt");
+			//read.colOutput();
+			
 		}
 	}
 	void prePeasy(){
@@ -292,16 +290,18 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 					NSbeams[0] = (Beam)mySkyscraper.myBeams.NSBeamLvl.get(lvlNumbers).get(glIndex[1]-1).get(zyx);
 					NSbeams[0].NSxb = (theValue);
 					NSbeams[1] = (Beam)mySkyscraper.myBeams.NSBeamLvl.get(lvlNumbers).get(glIndex[1]).get(zyx);
-					NSbeams[1].NSxb = temp[3].dist;
-					NSbeams[1] = (Beam)mySkyscraper.myBeams.NSBeamLvl.get(lvlNumbers).get(glIndex[1]).get(zyx);
+					NSbeams[1].NSxb = Integer.parseInt(temp[3].name);
+					//NSbeams[1] = (Beam)mySkyscraper.myBeams.NSBeamLvl.get(lvlNumbers).get(glIndex[1]).get(zyx);
 					NSbeams[1].NSDist = (glIndex[1]*mySkyscraper.myColumnGrid.typicalGridDist)+(theValue-mySkyscraper.myColumnGrid.typicalGridDist);
 				}
  		    }
 		} else if (glIndex[1]==0){
+			temp[3] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(glIndex[1]+1);
+			temp[3].name = Integer.toString(temp[3].dist-(temp[1].dist-temp[3].dist));
 			for (int lvlNumbers = 0;lvlNumbers<numLevels-1;lvlNumbers++){
-				for (int zyx=0; zyx<mySkyscraper.myColumnGrid.myEWLines.size()-1;zyx++){
+				for (int zyx=0; zyx<mySkyscraper.myColumnGrid.myEWLines.size();zyx++){					
 					NSbeams[0] = (Beam)mySkyscraper.myBeams.NSBeamLvl.get(lvlNumbers).get(glIndex[1]).get(zyx);
-					NSbeams[0].NSxb = (temp[1].dist);
+					NSbeams[0].NSxb = Integer.parseInt(temp[3].name);
 					NSbeams[1] = (Beam)mySkyscraper.myBeams.NSBeamLvl.get(lvlNumbers).get(glIndex[1]).get(zyx);
 					NSbeams[1].NSDist = (glIndex[1]*mySkyscraper.myColumnGrid.typicalGridDist)+(theValue-mySkyscraper.myColumnGrid.typicalGridDist);
 				}
@@ -359,14 +359,16 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		  // therefore you need to check the originator of the Event with
 		  // if (theEvent.isGroup())
 		  // to avoid an error message thrown by controlP5.
-
-		  if (theEvent.isGroup()) {
+		glIndex[0] = (int) cg1.getValue();
+		glIndex[1] = (int) cg2.getValue();
+		temp[0] = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(glIndex[0]);
+		temp[1] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(glIndex[1]);
+		temp[3] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(glIndex[1]+1);
+		
+		if (theEvent.isGroup()) {
 		    // check if the Event was triggered from a ControlGroup
 			  String ddlName = theEvent.getName();
-			  glIndex[0] = (int) cg1.getValue();
-			  glIndex[1] = (int) cg2.getValue();
-			  temp[0] = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(glIndex[0]);
-			  temp[1] = (ColumnGridLine) mySkyscraper.myColumnGrid.myEWLines.get(glIndex[1]);
+			 
 			  int NSdist = temp[0].dist;
 			  int EWdist = temp[1].dist; 
 			 
@@ -374,6 +376,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 					  sl1.setVisible(false);
 					  //if(glIndex[0]>0){
 						 // int minRangeNS = NSdIndex[glIndex[0]-1];
+					  
 					  sl2.setValue(NSdist);
 					  sl2.setRange(NSdist-250, NSdist+250);
 					  sl2.setVisible(true);
@@ -383,8 +386,13 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 				  sl2.setVisible(false);
 				  //if(glIndex[1]>0){
 					  //int minRangeEW = EWdIndex[glIndex[1]-1];
+				  if (glIndex[1]==0){
+				  sl1.setValue(Integer.parseInt(temp[3].name));
+				  System.out.println(temp[3].name);
+				  }else{
 				  sl1.setValue(EWdist);
 				  sl1.setRange(EWdist-250, EWdist+250);
+				  }
 				  sl1.setVisible(true);
 			  }
 				  
