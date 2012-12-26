@@ -18,6 +18,7 @@ import controlP5.*;
 
 public class ProclipsingSkyscraperOptimization extends PApplet{
 	controlFrame cf;
+	mousePosition mp;
 	
 	PeasyCam cam;
 	ControlP5 controlP5;
@@ -39,6 +40,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 
 	Slider sl1;
 	Slider sl2;
+	ControlWindow ctrlW;
 
 	int numLevels = 14;
 
@@ -72,13 +74,15 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		/*
 		output = createWriter("positions.txt");
 		*/
-		setupSliders();
+		//setupSliders();
 		setupGrid(); //Calling New Method;
-		cf = addControlFrame("extra", 200,200);
+		setupWindows();
+		//mp.setup();
+		//cf = addControlFrame("extra", 200,200);
 		//cf = addControlFrame("extra2", 300,200);
 		int abc = 100;
-		cf.control().addSlider("abc").plugTo(cf, "def").setRange(0, 255).setPosition(10,10).setValue(255).setVisible(true);
-		cf.background(abc);
+		//cf.control().addSlider("abc").plugTo(cf, "def").setRange(0, 255).setPosition(10,10).setValue(255).setVisible(true);
+		//cf.background(abc);
 	}
 
 	public void draw() {
@@ -251,12 +255,25 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		            	.setPosition(20,300)
 		            	.setSize(500,20)
 		            	.setVisible(false);
-		 
-		//MyListener = new MyControlListener();
-		  
-		//controlP5.getController("Edit GridLine").addListener(MyListener);
-	
+		 	
 		}
+	
+	void setupWindows(){
+		ctrlW = controlP5.addControlWindow("controlP5window2",600,100,400,200).show();
+		//controlP5.addSlider("sliderValue1").moveTo(ctrlW);
+		controlP5.addSlider("EditGridLineEW")
+        .setRange(0,500)
+        .setValue(0)
+			.setPosition(20,30)
+			.setSize(500,20)
+			.moveTo(ctrlW);
+		controlP5.addSlider("EditGridLineNS")
+    	.setRange(0,500)
+    	.setValue(0)
+    	.setPosition(20,50)
+    	.setSize(500,20)
+    	.moveTo(ctrlW);
+	}
 	
 	//New Method
 	/*GUI for chosing and isolating each line of the Grid. When Grid Line is chosen

@@ -6,7 +6,7 @@ import processing.core.PApplet;
 
 
 
-public class mousePosition {
+public class mousePosition extends PApplet{
 	
 	PApplet parent;
 	ControlP5 cp5;
@@ -20,18 +20,17 @@ public class mousePosition {
 		  println(theValue);
 	}
 	
-	void drawMousePostion(){
-		ctrlWindow = cp5.addControlWindow("controlP5window2",600,100,400,200);
-		cp5.window("controlP5window").show();
-		controlP5.controller("sliderValue1").moveTo(ctrlWindow);
+	public void setup(){
+		ctrlWindow = cp5.addControlWindow("controlP5window2",600,100,400,200).show();
+		cp5.addSlider("sliderValue1").moveTo(ctrlWindow);
 	}
 	
 	void myWindowTextfield(String theValue) {
 		  println("from controlWindow: "+theValue);
 	}
 	
-	void println(Object object){
-		System.out.println(object);
-	}
+	 public void draw() {
+	      background(255);
+	 }
 	
 }
