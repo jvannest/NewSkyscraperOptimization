@@ -19,9 +19,9 @@ public class controlFrame extends PApplet{
 	  public void setup() {
 		  size(w, h);
 		  frameRate(25);
-		  cp5 = new ControlP5(this);
+		  cp5 = new ControlP5(parent);
 		  cp5.addSlider("abc").setRange(0, 255).setPosition(10,10).setVisible(true);
-		  cp5.addSlider("def").plugTo(this,"def").setRange(0, 255).setPosition(10,30);
+		  cp5.addSlider("def").plugTo(parent,"def").setRange(0, 255).setPosition(10,30);
 	  }
 
 	  public void draw() {
