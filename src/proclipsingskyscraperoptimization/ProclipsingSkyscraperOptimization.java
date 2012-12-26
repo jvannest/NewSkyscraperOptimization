@@ -1,9 +1,11 @@
 
 package proclipsingskyscraperoptimization;
 
+
 import java.awt.event.*;
 
 import java.awt.*;
+
 import javax.swing.*;
 import java.io.*;
 import processing.core.PApplet;
@@ -15,6 +17,7 @@ import controlP5.*;
 
 
 public class ProclipsingSkyscraperOptimization extends PApplet{
+	controlFrame cf;
 	
 	PeasyCam cam;
 	ControlP5 controlP5;
@@ -71,6 +74,11 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		*/
 		setupSliders();
 		setupGrid(); //Calling New Method;
+		cf = addControlFrame("extra", 200,200);
+		//cf = addControlFrame("extra2", 300,200);
+		int abc = 100;
+		cf.control().addSlider("abc").plugTo(cf, "def").setRange(0, 255).setPosition(10,10).setValue(255).setVisible(true);
+		cf.background(abc);
 	}
 
 	public void draw() {
@@ -132,7 +140,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		}
 		
 		if (key == 'n'){
-			newOutput = createWriter("dataout.txt");
+			newOutput = createWriter("../files/dataout.txt");
 			newOutput.flush(); // Writes the remaining data to the file
 			
 			for(int y =0; y< numLevels; y++){
@@ -152,7 +160,7 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 			}
 			newOutput.close();
 			
-			beamOutput = createWriter("beamout.txt");
+			beamOutput = createWriter("../files/beamout.txt");
 			beamOutput.flush();
 			// beamout.txt output will be LevelNumber, Axis, EndPoint1, EndPoint2, BeamDepth
 			for(int y = 0; y< numLevels; y++){
@@ -200,8 +208,9 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		
 		if (key == 'o'){
 			Read read = new Read();
-			read.beamOutput("beamout.txt");
-			//read.colOutput();
+			read.beamOutput("../files/beamout.txt");
+			read.colOutput("../files/dataout.txt");
+			read.beamCost("../files/sbcosttable.txt");
 			
 		}
 	}
@@ -222,10 +231,10 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	}
 	
 	void setupSliders() {
-		  controlP5.addSlider("VAR 1", 0, 3, 2, 20, 50, 200, 20);
-		  controlP5.addSlider("VAR 2", 0, 3, 2, 20, 75, 200, 20);
-		  controlP5.addSlider("VAR 3", 0, 4, 3, 20, 100, 200, 20);
-		  controlP5.addSlider("VAR 4", 0, 300, 100, 20, 125, 200, 20);
+		  //controlP5.addSlider("VAR 1", 0, 3, 2, 20, 50, 200, 20);
+		  //controlP5.addSlider("VAR 2", 0, 3, 2, 20, 75, 200, 20);
+		  //controlP5.addSlider("VAR 3", 0, 4, 3, 20, 100, 200, 20);
+		  //controlP5.addSlider("VAR 4", 0, 300, 100, 20, 125, 200, 20);
 		
 		  //new slider for moving Grid Line
 		 sl1 = controlP5.addSlider("EditGridLineEW")
@@ -418,6 +427,21 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		  temp = (ColumnGridLine) mySkyscraper.myColumnGrid.myNSLines.get(p);
 		  System.out.println(temp.id);
 		  System.out.println(mySkyscraper.myColumnGrid.myEWLines.get((int)theEvent.getGroup().getValue()));*/
+	}
+	
+	controlFrame addControlFrame(String theName, int theWidth, int theHeight) {
+		  Frame f = new Frame(theName);
+		  controlFrame CF = new controlFrame(this, theWidth, theHeight);
+		  f.add(CF);
+		  CF.init();
+		  //CF.setup();
+		  //CF.draw();
+		  f.setTitle(theName);
+		  f.setSize(CF.w, CF.h);
+		  f.setLocation(300, 300);
+		  f.setResizable(true);
+		  f.setVisible(true);
+		  return CF;
 	}
           
 }

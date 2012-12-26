@@ -15,7 +15,8 @@ public class Read extends PApplet{
 	
 	BufferedReader reader;
 	String line;
-	String[] beamPieces, colPieces;
+	String[] beamPieces, colPieces, bCPieces;
+	ProclipsingSkyscraperOptimization myProclipsing;
 	
 	public void beamOutput(String file){
 		reader = createReader(file);
@@ -27,7 +28,8 @@ public class Read extends PApplet{
 				    String endpoint1 = beamPieces[2];
 				    String endpoint2 = beamPieces[3];
 				    int beamDepth = Integer.parseInt(beamPieces[4]);
-				    System.out.println("Level: " + level + ", Axis: " + axis + ", Endpoint1: " + endpoint1 + ", Endpoint2: " + endpoint2 + ", Beam Depth: " + beamDepth);
+				   
+				    //System.out.println("Level: " + level + ", Axis: " + axis + ", Endpoint1: " + endpoint1 + ", Endpoint2: " + endpoint2 + ", Beam Depth: " + beamDepth);
 			    }
 			  } catch (IOException e) {
 			    e.printStackTrace();
@@ -40,26 +42,51 @@ public class Read extends PApplet{
 			  
 	}
 	
-	public void colOutput(){
-		reader = createReader("beamout.txt");
-		  try {
-			    line = reader.readLine();
-			  } catch (IOException e) {
+	public void colOutput(String file){
+		reader = createReader(file);
+		try {
+			  while ((line = reader.readLine()) != null){
+				  colPieces = split(line, ',');
+				  String EW = colPieces[0];
+				  int EWdist = Integer.parseInt(colPieces[1]);
+				  String NS = colPieces[2];
+				  int NSdist = Integer.parseInt(colPieces[3]);
+				  int lvlNum = Integer.parseInt(colPieces[4]);
+				  double lvlDist = Double.parseDouble(colPieces[5]);
+				  //System.out.println(EW + " " + EWdist + " " + NS + " " + NSdist + " " + lvlNum + " " + lvlDist);
+				  
+			  }
+			} catch (IOException e) {
 			    e.printStackTrace();
 			    line = null;
-			  }
-			  if (line == null) {
+			}
+			if (line == null) {
 			    // Stop reading because of an error or file is empty
 			    noLoop();  
-			  } else {
-			    colPieces = split(line, ',');
-			    String EW = colPieces[0];
-				int EWdist = Integer.parseInt(colPieces[1]);
-				String NS = colPieces[2];
-				int NSdist = Integer.parseInt(colPieces[3]);
-				int lvlNum = Integer.parseInt(colPieces[4]);
-				double lvlDist = Double.parseDouble(colPieces[5]);
+			}
+			  
+	}
+	
+	public void beamCost(String file){
+		reader = createReader(file);
+		try {
+			  while ((line = reader.readLine()) != null){
+				  bCPieces = split(line, ',');
+				  int depth = Integer.parseInt(bCPieces[0]);
+			      int minL = Integer.parseInt(bCPieces[1]);
+			      int maxL = Integer.parseInt(bCPieces[2]);
+			      double cost = Double.parseDouble(bCPieces[3]);
+				  //System.out.println(EW + " " + EWdist + " " + NS + " " + NSdist + " " + lvlNum + " " + lvlDist);
+				  
 			  }
+			} catch (IOException e) {
+			    e.printStackTrace();
+			    line = null;
+			}
+			if (line == null) {
+			    // Stop reading because of an error or file is empty
+			    noLoop();  
+			}
 			  
 	}
 	
@@ -71,6 +98,7 @@ public class Read extends PApplet{
 	ArrayList<Beam> NSBeamCol, EWBeamCol;
 	ArrayList myColumnsA;
 	Column myColumn;
+	
 	Columns myColumns;
 	LevelStack myLevelStack;
 	ColumnGridLine ColGrid;
