@@ -261,6 +261,8 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	void setupWindows(){
 		ctrlW = controlP5.addControlWindow("controlP5window2",600,100,400,200).show();
 		//controlP5.addSlider("sliderValue1").moveTo(ctrlW);
+		ctrlW.addTab("Tab1");
+		ctrlW.addTab("NSGridLine Tab");
 		controlP5.addSlider("EditGridLineEW")
         .setRange(0,500)
         .setValue(0)
@@ -271,8 +273,8 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
     	.setRange(0,500)
     	.setValue(0)
     	.setPosition(20,50)
-    	.setSize(500,20)
-    	.moveTo(ctrlW);
+    	.setSize(500,20).moveTo("NSGridLine Tab");
+		
 	}
 	
 	//New Method
