@@ -71,11 +71,9 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		//controlP5.setControlFont(p);
 		  
 		mySkyscraper = new Skyscraper(numLevels, this);
-		/*
-		output = createWriter("positions.txt");
-		*/
+
 		//setupSliders();
-		setupGrid(); //Calling New Method;
+		//setupGrid(); //Calling New Method;
 		setupWindows();
 		//mp.setup();
 		//cf = addControlFrame("extra", 200,200);
@@ -241,39 +239,60 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 		  //controlP5.addSlider("VAR 4", 0, 300, 100, 20, 125, 200, 20);
 		
 		  //new slider for moving Grid Line
-		 sl1 = controlP5.addSlider("EditGridLineEW")
-			            .setRange(0,500)
-		 				//.setValue(mySkyscraper.myColumnGrid.typicalGridDist*(int)cg2.getValue())
-			            .setValue(0)
-		 				.setPosition(20,300)
-		 				.setSize(500,20)
-		 				.setVisible(false);
+		 //sl1 = controlP5.addSlider("EditGridLineEW")
+		//	            .setRange(0,500)
+		 //				//.setValue(mySkyscraper.myColumnGrid.typicalGridDist*(int)cg2.getValue())
+		//	            .setValue(0)
+		 //				.setPosition(20,300)
+		 //				.setSize(500,20)
+		 //				.setVisible(false);
 
-		 sl2 = controlP5.addSlider("EditGridLineNS")
-		            	.setRange(0,500)
-		            	.setValue(0)
-		            	.setPosition(20,300)
-		            	.setSize(500,20)
-		            	.setVisible(false);
+		 //sl2 = controlP5.addSlider("EditGridLineNS")
+		 //           	.setRange(0,500)
+		 //           	.setValue(0)
+		 //           	.setPosition(20,300)
+		 //           	.setSize(500,20)
+		 //           	.setVisible(false);
 		 	
 		}
 	
 	void setupWindows(){
-		ctrlW = controlP5.addControlWindow("controlP5window2",600,100,400,200).show();
+		ctrlW = controlP5.addControlWindow("controlP5window2",800,100,540,200).show();
+		ctrlW.background = 255;
 		//controlP5.addSlider("sliderValue1").moveTo(ctrlW);
-		ctrlW.addTab("Tab1");
+		ctrlW.addTab("EWGridLine Tab");
 		ctrlW.addTab("NSGridLine Tab");
-		controlP5.addSlider("EditGridLineEW")
+		cg2 = controlP5.addDropdownList(" Move NS GridLine")
+				.setPosition(20,20)
+				.setSize(100, 100)
+				.setVisible(true)
+				.moveTo("EWGridLine Tab");
+		sl2 = controlP5.addSlider("EditGridLineEW")
         .setRange(0,500)
         .setValue(0)
-			.setPosition(20,30)
+			.setPosition(20,40)
 			.setSize(500,20)
-			.moveTo(ctrlW);
-		controlP5.addSlider("EditGridLineNS")
+			.setVisible(false)
+			.moveTo("EWGridLine Tab");
+		cg1 = controlP5.addDropdownList(" Move NS GridLine")
+        .setPosition(20,20)
+        .setSize(100,100)
+        .setVisible(true)
+        .moveTo("NSGridLine Tab");
+		sl1 = controlP5.addSlider("EditGridLineNS")
     	.setRange(0,500)
     	.setValue(0)
-    	.setPosition(20,50)
+    	.setPosition(20,40)
+    	.setVisible(false)
     	.setSize(500,20).moveTo("NSGridLine Tab");
+		
+		for(int i=1; i<=mySkyscraper.myColumnGrid.myNSLines.size(); i++){
+			cg1.addItem(" Grid_Line "+i, i-1);
+		}
+		
+		for(int i=65; i<=mySkyscraper.myColumnGrid.myEWLines.size()+64; i++){
+			cg2.addItem(" Grid_Line "+(char)i, i-65);
+		}
 		
 	}
 	
@@ -284,23 +303,23 @@ public class ProclipsingSkyscraperOptimization extends PApplet{
 	 * reference to its current location.
 	 */
 	void setupGrid(){
-		cg1 = controlP5.addDropdownList(" Move NS GridLine")
-			           .setPosition(20,170)
-			           .setSize(100,100);
-		cg2 = controlP5.addDropdownList(" Move EW GridLine")
-				       .setPosition(130,170)
-				       .setSize(100,100);
+		//cg1 = controlP5.addDropdownList(" Move NS GridLine")
+		//	           .setPosition(20,170)
+		//	           .setSize(100,100).moveTo("NSGridLine Tab");
+		//cg2 = controlP5.addDropdownList(" Move EW GridLine")
+		//		       .setPosition(130,170)
+		//		       .setSize(100,100).moveTo("EWGridLine Tab");
 		
 		//MyListener = new MyControlListener();
 		//cg1.getController(" Move NS GridLine").addListener(MyListener);	
 		
-		for(int i=1; i<=mySkyscraper.myColumnGrid.myNSLines.size(); i++){
-			cg1.addItem(" Grid_Line "+i, i-1);
-		}
+		//for(int i=1; i<=mySkyscraper.myColumnGrid.myNSLines.size(); i++){
+		//	cg1.addItem(" Grid_Line "+i, i-1);
+		//}
 		
-		for(int i=65; i<=mySkyscraper.myColumnGrid.myEWLines.size()+64; i++){
-			cg2.addItem(" Grid_Line "+(char)i, i-65);
-		}
+		//for(int i=65; i<=mySkyscraper.myColumnGrid.myEWLines.size()+64; i++){
+		//	cg2.addItem(" Grid_Line "+(char)i, i-65);
+		//}
 				
 		//cg1.setIndex(ColumnGrid.myNSLines.size());
 		//cg2.setIndex(ColumnGrid.myEWLines.size());
